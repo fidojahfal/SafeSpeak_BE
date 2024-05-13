@@ -1,14 +1,18 @@
 import { Router } from 'express';
+import {
+  getAllUsers,
+  getUserById,
+  register,
+  updateUser,
+} from '../controllers/userController.js';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  return res.status(200).json({ message: 'users' });
-});
+router.get('/', getAllUsers);
 
-router.get('/:user_id', (req, res) => {});
+router.get('/:user_id', getUserById);
 router.post('/login', (req, res) => {});
-router.post('/register', (req, res) => {});
-router.patch('/:user_id', (req, res) => {});
+router.post('/register', register);
+router.put('/:user_id', updateUser);
 
 export default router;
