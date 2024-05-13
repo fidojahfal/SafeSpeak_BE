@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use('/api/v1', userRouter);
+app.use('/api/v1/users', userRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)
