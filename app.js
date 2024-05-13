@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import userRouter from './routes/userRoutes.js';
 
 const app = express();
 
@@ -10,9 +11,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use('/api/v1', (req, res) => {
-  return res.json({ message: 'Tes' });
-});
+app.use('/api/v1', userRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)
