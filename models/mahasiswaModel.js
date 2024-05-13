@@ -10,4 +10,4 @@ const mahasiswaSchema = new mongoose.Schema({
 
 const Mahasiswa = mongoose.model('mahasiswa', mahasiswaSchema);
 
-module.exports = Mahasiswa;
+export default Mahasiswa;
