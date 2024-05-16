@@ -12,13 +12,13 @@ import authToken from '../middlewares/authToken.js';
 const router = Router();
 
 router.get('/', getAllUsers);
+router.post('/login', login);
+router.post('/register', register);
 
 router.use(authToken);
 
 router.get('/me', getOwnProfile);
 router.get('/:user_id', getUserById);
-router.post('/login', login);
-router.post('/register', register);
 router.put('/:user_id', updateUser);
 
 export default router;
