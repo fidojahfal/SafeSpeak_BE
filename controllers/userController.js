@@ -1,6 +1,7 @@
 import User from '../models/userModel.js';
 import Mahasiswa from '../models/mahasiswaModel.js';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export const getAllUsers = async (req, res) => {
   let users;
@@ -19,6 +20,44 @@ export const getUserById = async (req, res) => {
       .exec();
   } catch (error) {}
   res.status(200).json({ message: 'Success', data: { user: users } });
+};
+
+export const login = async (req, res) => {
+  const { username, password } = req.body;
+
+  let user;
+
+  try {
+    user = await User.findOne({ username });
+  } catch (error) {
+    console.log(error);
+  }
+
+  let isPasswordValid;
+
+  try {
+    isPasswordValid = await bcrypt.compare(password, user.password);
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!user || !isPasswordValid) {
+    return res
+      .status(402)
+      .json({ message: 'Your username or password is wrong.' });
+  }
+
+  let token;
+
+  try {
+    token = jwt.sign({ id: user.id }, process.env.SECRET_JWT, {
+      expiresIn: '1h',
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  res.status(200).json({ message: 'Success', data: { token } });
 };
 
 export const register = async (req, res) => {
