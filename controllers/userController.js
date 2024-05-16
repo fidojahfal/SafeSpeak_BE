@@ -61,7 +61,7 @@ export const login = async (req, res) => {
 };
 
 export const getOwnProfile = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.userData;
 
   let user;
 
