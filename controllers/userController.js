@@ -95,7 +95,10 @@ export const register = async (req, res) => {
   let hashedPassword;
 
   try {
-    hashedPassword = await bcrypt.hash(password, 13);
+    hashedPassword = await bcrypt.hash(
+      password,
+      parseInt(process.env.BCRYPT_SALT)
+    );
   } catch (error) {
     console.log(error);
   }
