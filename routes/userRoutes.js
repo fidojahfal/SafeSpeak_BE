@@ -7,10 +7,13 @@ import {
   register,
   updateUser,
 } from '../controllers/userController.js';
+import authToken from '../middlewares/authToken.js';
 
 const router = Router();
 
 router.get('/', getAllUsers);
+
+router.use(authToken);
 
 router.get('/me', getOwnProfile);
 router.get('/:user_id', getUserById);
