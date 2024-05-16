@@ -60,6 +60,24 @@ export const login = async (req, res) => {
   res.status(200).json({ message: 'Success', data: { token } });
 };
 
+export const getOwnProfile = async (req, res) => {
+  const { id } = req.body;
+
+  let user;
+
+  try {
+    user = await User.findById(id, '-password');
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!user) {
+    return res.status(404).json({ message: "Can't find your profile" });
+  }
+
+  res.status(200).json({ message: 'Success', data: { user } });
+};
+
 export const register = async (req, res) => {
   const { name, username, nim, email, jurusan, password, telepon } = req.body;
 
