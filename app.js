@@ -3,23 +3,25 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import userRouter from './routes/userRoutes.js';
+import defaultRouter from './routes/defaultRoutes.js';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use('/api/v1', (req, res) => {
-  return res.json({ message: 'Tes' });
-});
+app.use('/api/v1', defaultRouter);
+app.use('/api/v1/users', userRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('Connected to database');
-    app.listen(3000, () => {
-      console.log('Listening to port 3000');
+    app.listen(PORT, () => {
+      console.log(`Listening to port ${PORT}`);
     });
   })
   .catch((error) => {
