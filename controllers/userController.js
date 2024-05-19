@@ -124,7 +124,7 @@ export const register = async (req, res) => {
     console.log(error);
   }
 
-  res.status(200).json({ message: 'Success', data: null });
+  res.status(200).json({ message: 'Success' });
 };
 
 export const updateUser = async (req, res) => {
