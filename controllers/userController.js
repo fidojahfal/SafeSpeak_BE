@@ -7,7 +7,9 @@ export const getAllUsers = async (req, res) => {
   let users;
   try {
     users = await User.find({}, '-password');
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ message: 'Could not find user' });
+  }
   res.status(200).json({ message: 'Success', data: { users } });
 };
 
@@ -18,7 +20,11 @@ export const getUserById = async (req, res) => {
     users = await Mahasiswa.findOne({ user_id })
       .populate('user_id', '-password')
       .exec();
-  } catch (error) {}
+  } catch (error) {
+    return res
+      .status(422)
+      .json({ message: 'Could not find specified user by id' });
+  }
   res.status(200).json({ message: 'Success', data: { user: users } });
 };
 
@@ -30,7 +36,7 @@ export const login = async (req, res) => {
   try {
     user = await User.findOne({ username });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: 'Could not login!' });
   }
 
   let isPasswordValid;
@@ -38,7 +44,10 @@ export const login = async (req, res) => {
   try {
     isPasswordValid = await bcrypt.compare(password, user.password);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({
+      message:
+        'Could not log you in, please check your credential and try again!',
+    });
   }
 
   if (!user || !isPasswordValid) {
@@ -54,7 +63,9 @@ export const login = async (req, res) => {
       expiresIn: '1h',
     });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({
+      message: 'Could not to create token!',
+    });
   }
 
   res.status(200).json({ message: 'Success', data: { token } });
@@ -68,7 +79,9 @@ export const getOwnProfile = async (req, res) => {
   try {
     user = await User.findById(id, '-password');
   } catch (error) {
-    console.log(error);
+    return res
+      .status(500)
+      .json({ message: 'Could not find specified user by id' });
   }
 
   if (!user) {
@@ -85,7 +98,7 @@ export const register = async (req, res) => {
   try {
     user = await User.findOne({ username, email });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: 'Could not find user!' });
   }
 
   if (user) {
@@ -100,7 +113,7 @@ export const register = async (req, res) => {
       parseInt(process.env.BCRYPT_SALT)
     );
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: 'Error saving password!' });
   }
 
   const newUser = new User({
@@ -121,7 +134,7 @@ export const register = async (req, res) => {
     await newUser.save();
     await newMahasiswa.save();
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: 'Could not save user!' });
   }
 
   res.status(200).json({ message: 'Success' });
@@ -135,7 +148,7 @@ export const updateUser = async (req, res) => {
     await Mahasiswa.findOneAndUpdate({ user_id }, { name, jurusan, telepon });
     await User.findByIdAndUpdate(user_id, { email });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: 'Could not update user!' });
   }
   res.status(200).json({ message: 'Success' });
 };
