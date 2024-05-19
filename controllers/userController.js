@@ -120,7 +120,7 @@ export const register = async (req, res) => {
     username,
     email,
     password: hashedPassword,
-    avatar: `https://api.multiavatar.com/${username}.png`,
+    avatar: `https://source.boringavatars.com/beam/100/${username}?colors=0D6EFD,6EA8FE,FFF3CD,FFDA6A,FFC107`,
   });
   const newMahasiswa = new Mahasiswa({
     name,
