@@ -7,6 +7,7 @@ import userRouter from './routes/userRoutes.js';
 import defaultRouter from './routes/defaultRoutes.js';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -19,8 +20,8 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('Connected to database');
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(`Listening to port ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`Listening to port ${PORT}`);
     });
   })
   .catch((error) => {
