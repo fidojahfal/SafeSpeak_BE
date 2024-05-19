@@ -12,8 +12,6 @@ import authToken from '../middlewares/authToken.js';
 const router = Router();
 
 router.get('/', getAllUsers);
-router.post('/login', login);
-router.post('/register', register);
 
 router.use(authToken);
 

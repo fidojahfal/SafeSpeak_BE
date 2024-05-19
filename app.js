@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import userRouter from './routes/userRoutes.js';
+import defaultRouter from './routes/defaultRoutes.js';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+app.use('/api/v1', defaultRouter);
 app.use('/api/v1/users', userRouter);
 
 mongoose
