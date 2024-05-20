@@ -2,6 +2,7 @@ import User from '../models/userModel.js';
 import Mahasiswa from '../models/mahasiswaModel.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { validationResult } from 'express-validator';
 
 export const getAllUsers = async (req, res) => {
   let users;
@@ -94,6 +95,11 @@ export const getOwnProfile = async (req, res) => {
 export const register = async (req, res) => {
   const { name, username, nim, email, jurusan, password, telepon } = req.body;
 
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ message: 'Invalid input from user!' });
+  }
+
   let user;
   try {
     user = await User.findOne({ username, email });
@@ -144,6 +150,11 @@ export const register = async (req, res) => {
 export const updateUser = async (req, res) => {
   const { user_id } = req.params;
   const { name, jurusan, telepon, email } = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ message: 'Invalid input from user!' });
+  }
 
   try {
     await Mahasiswa.findOneAndUpdate({ user_id }, { name, jurusan, telepon });
