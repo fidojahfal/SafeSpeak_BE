@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use('/api/v1', defaultRouter);
-app.use('/api/v1/users', userRouter);
+app.use('/v1', defaultRouter);
+app.use('/v1/users', userRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)
