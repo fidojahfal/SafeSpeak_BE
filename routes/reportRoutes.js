@@ -4,6 +4,7 @@ import {
   getAllReports,
   getReportById,
   insertReport,
+  updateReport,
 } from '../controllers/reportController.js';
 
 const router = Router();
@@ -14,7 +15,7 @@ router.get('/', getAllReports);
 router.post('/', insertReport);
 
 router.get('/:report_id', getReportById);
-router.put('/:report_id', (req, res) => {});
+router.put('/:report_id', updateReport);
 
 router.get('/sum', (req, res) => {});
 
