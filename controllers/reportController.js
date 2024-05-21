@@ -1,4 +1,7 @@
+import transporter from '../mails/config.js';
+import templateMail from '../mails/template.js';
 import Report from '../models/reportModel.js';
+import User from '../models/userModel.js';
 
 export const getAllReports = async (req, res) => {
   let reports;
@@ -39,6 +42,25 @@ export const insertReport = async (req, res) => {
     await newReport.save();
   } catch (error) {
     return console.log(error);
+  }
+
+  let user;
+  try {
+    user = await User.findById(id);
+  } catch (error) {
+    console.log(error);
+  }
+
+  const message = {
+    from: '<safespeakteams>@gmail.com',
+    to: user.email,
+    subject: 'Your reports',
+    html: templateMail,
+  };
+  try {
+    await transporter.sendMail(message);
+  } catch (error) {
+    console.log(error);
   }
   res.status(201).json({ message: 'Success', data: null });
 };
