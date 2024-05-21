@@ -64,3 +64,18 @@ export const insertReport = async (req, res) => {
   }
   res.status(201).json({ message: 'Success', data: null });
 };
+
+export const getReportById = async (req, res) => {
+  const { report_id } = req.params;
+
+  let report;
+  try {
+    report = await Report.findById(report_id).populate('user_id', [
+      '-password',
+      '-role',
+    ]);
+  } catch (error) {
+    return console.log(error);
+  }
+  res.status(200).json({ message: 'Success', data: { report } });
+};
