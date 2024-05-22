@@ -26,6 +26,21 @@ export const insertReport = async (req, res) => {
   } = req.body;
   const { id } = req.userData;
 
+  let checkReport;
+
+  try {
+    checkReport = await Report.findOne({ user_id: id, status: 0 });
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (checkReport) {
+    return res.status(400).json({
+      message:
+        'There are still an active report, please edit that report or delete it!',
+    });
+  }
+
   const newReport = new Report({
     title,
     type,
