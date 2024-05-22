@@ -158,3 +158,35 @@ export const deleteReport = async (req, res) => {
   }
   res.status(201).json({ message: 'Success', data: null });
 };
+
+export const countReports = async (req, res) => {
+  let reports;
+
+  try {
+    reports = await Report.aggregate([
+      {
+        $facet: {
+          totalCount: [{ $count: 'count' }],
+          status_0: [{ $match: { status: 0 } }, { $count: 'count' }],
+          status_1: [{ $match: { status: 1 } }, { $count: 'count' }],
+          status_2: [{ $match: { status: 2 } }, { $count: 'count' }],
+        },
+      },
+    ]);
+  } catch (error) {
+    console.log(error);
+  }
+  const { total, status_0, status_1, status_2 } = {
+    total: reports[0].totalCount[0] ? reports[0].totalCount[0].count : 0,
+    status_0: reports[0].status_0[0] ? reports[0].status_0[0].count : 0,
+    status_1: reports[0].status_1[0] ? reports[0].status_1[0].count : 0,
+    status_2: reports[0].status_2[0] ? reports[0].status_2[0].count : 0,
+  };
+
+  res
+    .status(200)
+    .json({
+      message: 'Success',
+      data: { total, status_0, status_1, status_2 },
+    });
+};
