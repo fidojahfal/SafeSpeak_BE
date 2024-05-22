@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import authToken from '../middlewares/authToken.js';
 import {
+  deleteReport,
   getAllReports,
   getReportById,
   insertReport,
@@ -16,6 +17,7 @@ router.post('/', insertReport);
 
 router.get('/:report_id', getReportById);
 router.put('/:report_id', updateReport);
+router.delete('/:report_id', deleteReport);
 
 router.get('/sum', (req, res) => {});
 
