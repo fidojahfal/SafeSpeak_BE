@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import transporter from '../mails/config.js';
 import templateMail from '../mails/template.js';
 import Report from '../models/reportModel.js';
@@ -8,7 +9,7 @@ export const getAllReports = async (req, res) => {
   try {
     reports = await Report.find({});
   } catch (error) {
-    return console.log(error);
+    return res.status(500).json({ message: 'Could not find user!' });
   }
   res.status(200).json({ message: 'Success', data: { reports } });
 };
@@ -22,16 +23,23 @@ export const insertReport = async (req, res) => {
     description,
     evidence,
     is_anonim,
-    status,
   } = req.body;
   const { id } = req.userData;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return res.status(401).json({ message: 'Invalid input from user!' });
+  }
 
   let checkReport;
 
   try {
     checkReport = await Report.findOne({ user_id: id, status: 0 });
   } catch (error) {
-    console.log(error);
+    return res
+      .status(500)
+      .json({ message: 'Could not find available report!' });
   }
 
   if (checkReport) {
@@ -56,14 +64,14 @@ export const insertReport = async (req, res) => {
   try {
     await newReport.save();
   } catch (error) {
-    return console.log(error);
+    return res.status(500).json({ message: 'Could not save report!' });
   }
 
   let user;
   try {
     user = await User.findById(id);
   } catch (error) {
-    console.log(error);
+    return res.status(422).json({ message: 'Could not find user!' });
   }
 
   const message = {
@@ -75,7 +83,7 @@ export const insertReport = async (req, res) => {
   try {
     await transporter.sendMail(message);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: 'Could not send report email!' });
   }
   res.status(201).json({ message: 'Success', data: null });
 };
@@ -90,9 +98,24 @@ export const getReportById = async (req, res) => {
       '-role',
     ]);
   } catch (error) {
-    return console.log(error);
+    return res
+      .status(422)
+      .json({ message: 'Could not find specified report by id!' });
   }
   res.status(200).json({ message: 'Success', data: { report } });
+};
+
+export const getReportsByUserId = async (req, res) => {
+  const { user_id } = req.params;
+
+  let reports;
+  try {
+    reports = await Report.find({ user_id });
+  } catch (error) {
+    return res.status(422).json({ message: 'Could not find user reports!' });
+  }
+
+  res.status(200).json({ message: 'Success', data: { reports } });
 };
 
 export const updateReport = async (req, res) => {
@@ -108,11 +131,16 @@ export const updateReport = async (req, res) => {
   } = req.body;
   const { report_id } = req.params;
 
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ message: 'Invalid input from user!' });
+  }
+
   let report;
   try {
     report = await Report.findById(report_id);
   } catch (error) {
-    console.log(error);
+    return res.status(422).json({ message: 'Could not find report!' });
   }
 
   if (report.status !== 0 && !status) {
@@ -132,7 +160,7 @@ export const updateReport = async (req, res) => {
           is_anonim,
         });
   } catch (error) {
-    return console.log(error);
+    return res.status(500).json({ message: 'Could not update report!' });
   }
   res.status(201).json({ message: 'Success', data: null });
 };
@@ -144,7 +172,7 @@ export const deleteReport = async (req, res) => {
   try {
     report = await Report.findById(report_id);
   } catch (error) {
-    console.log(error);
+    return res.status(422).json({ message: 'Could not find report!' });
   }
 
   if (report.status !== 0) {
@@ -154,7 +182,7 @@ export const deleteReport = async (req, res) => {
   try {
     await Report.findByIdAndDelete(report_id);
   } catch (error) {
-    return console.log(error);
+    return res.status(500).json({ message: 'Could not delete report!' });
   }
   res.status(201).json({ message: 'Success', data: null });
 };
@@ -174,7 +202,7 @@ export const countReports = async (req, res) => {
       },
     ]);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json({ message: 'Could not count the reports!' });
   }
   const { total, status_0, status_1, status_2 } = {
     total: reports[0].totalCount[0] ? reports[0].totalCount[0].count : 0,
@@ -183,10 +211,8 @@ export const countReports = async (req, res) => {
     status_2: reports[0].status_2[0] ? reports[0].status_2[0].count : 0,
   };
 
-  res
-    .status(200)
-    .json({
-      message: 'Success',
-      data: { total, status_0, status_1, status_2 },
-    });
+  res.status(200).json({
+    message: 'Success',
+    data: { total, status_0, status_1, status_2 },
+  });
 };

@@ -5,6 +5,7 @@ import {
   deleteReport,
   getAllReports,
   getReportById,
+  getReportsByUserId,
   insertReport,
   updateReport,
 } from '../controllers/reportController.js';
@@ -16,6 +17,7 @@ router.get('/sum', countReports);
 router.use(authToken);
 
 router.get('/', getAllReports);
+router.get('/:user_id', getReportsByUserId);
 router.post(
   '/',
   [
