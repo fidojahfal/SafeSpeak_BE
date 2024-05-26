@@ -17,7 +17,7 @@ router.get('/sum', countReports);
 router.use(authToken);
 
 router.get('/', getAllReports);
-router.get('/:user_id', getReportsByUserId);
+router.get('/user/:user_id', getReportsByUserId);
 router.post(
   '/',
   [
