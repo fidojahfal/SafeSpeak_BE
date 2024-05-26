@@ -102,6 +102,9 @@ export const getReportById = async (req, res) => {
       .status(422)
       .json({ message: 'Could not find specified report by id!' });
   }
+  if (report.is_anonim) {
+    report.user_id = report.user_id._id;
+  }
   res.status(200).json({ message: 'Success', data: { report } });
 };
 
