@@ -25,5 +25,22 @@ export const insertArticle = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: 'Could not save your article!' });
   }
-  res.status(200).json({ message: 'Success', data: null });
+  res.status(201).json({ message: 'Success', data: null });
+};
+
+export const updateArticle = async (req, res) => {
+  const { title, content } = req.body;
+  const { article_id } = req.params;
+
+  let article;
+
+  try {
+    article = await Article.findByIdAndUpdate(article_id, { title, content });
+  } catch (error) {
+    return res
+      .status(422)
+      .json({ message: 'Could not find article specified by id' });
+  }
+
+  res.status(200).json({ message: 'Success', data: { article } });
 };
