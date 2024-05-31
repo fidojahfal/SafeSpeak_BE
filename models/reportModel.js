@@ -10,6 +10,7 @@ const reportSchema = new mongoose.Schema({
   is_anonim: { type: Boolean, required: true },
   user_id: { type: mongoose.Types.ObjectId, required: true, ref: 'user' },
   status: { type: Number, required: true },
+  is_delete: { type: Boolean, required: true },
   created_at: { type: Date, required: true, default: Date.now },
 });
 

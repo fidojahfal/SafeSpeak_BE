@@ -8,6 +8,7 @@ import {
   getReportsByUserId,
   insertReport,
   updateReport,
+  updateStatus,
 } from '../controllers/reportController.js';
 import { body } from 'express-validator';
 
@@ -46,6 +47,7 @@ router.put(
   ],
   updateReport
 );
+router.put('/:report_id/status', [body('status').notEmpty()], updateStatus);
 router.delete('/:report_id', deleteReport);
 
 export default router;
