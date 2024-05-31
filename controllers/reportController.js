@@ -222,7 +222,7 @@ export const deleteReport = async (req, res) => {
   }
 
   try {
-    await Report.findByIdAndUpdate(report_id, { is_delete: true, status: 4 });
+    await Report.findByIdAndUpdate(report_id, { is_delete: true });
   } catch (error) {
     return res.status(500).json({ message: 'Could not delete report!' });
   }
