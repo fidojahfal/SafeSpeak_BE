@@ -7,7 +7,7 @@ import User from '../models/userModel.js';
 export const getAllReports = async (req, res) => {
   let reports;
   try {
-    reports = await Report.find({});
+    reports = await Report.find({ is_delete: false });
   } catch (error) {
     return res.status(500).json({ message: 'Could not find user!' });
   }
@@ -35,7 +35,10 @@ export const insertReport = async (req, res) => {
   let checkReport;
 
   try {
-    checkReport = await Report.findOne({ user_id: id, status: 0 });
+    checkReport = await Report.findOne({
+      user_id: id,
+      $or: [{ status: 0 }, { status: 1 }],
+    });
   } catch (error) {
     return res
       .status(500)
@@ -59,6 +62,7 @@ export const insertReport = async (req, res) => {
     is_anonim,
     user_id: id,
     status: 0,
+    is_delete: false,
   });
 
   try {
@@ -113,7 +117,7 @@ export const getReportsByUserId = async (req, res) => {
 
   let reports;
   try {
-    reports = await Report.find({ user_id });
+    reports = await Report.find({ user_id, is_delete: false });
   } catch (error) {
     return res.status(422).json({ message: 'Could not find user reports!' });
   }
@@ -144,6 +148,12 @@ export const updateReport = async (req, res) => {
     report = await Report.findById(report_id);
   } catch (error) {
     return res.status(422).json({ message: 'Could not find report!' });
+  }
+
+  if (report.is_delete) {
+    return res
+      .status(404)
+      .json({ message: 'Could not find report specified by id!' });
   }
 
   if (report.status !== 0 && !status) {
@@ -183,7 +193,7 @@ export const deleteReport = async (req, res) => {
   }
 
   try {
-    await Report.findByIdAndDelete(report_id);
+    await Report.findByIdAndUpdate(report_id, { is_delete: true, status: 4 });
   } catch (error) {
     return res.status(500).json({ message: 'Could not delete report!' });
   }
