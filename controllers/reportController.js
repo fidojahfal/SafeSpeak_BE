@@ -37,6 +37,7 @@ export const insertReport = async (req, res) => {
   try {
     checkReport = await Report.findOne({
       user_id: id,
+      is_delete: false,
       $or: [{ status: 0 }, { status: 1 }],
     });
   } catch (error) {
@@ -125,6 +126,37 @@ export const getReportsByUserId = async (req, res) => {
   res.status(200).json({ message: 'Success', data: { reports } });
 };
 
+export const updateStatus = async (req, res) => {
+  const { status } = req.body;
+  const { report_id } = req.params;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ message: 'Invalid input from user!' });
+  }
+
+  let report;
+  try {
+    report = await Report.findById(report_id);
+  } catch (error) {
+    return res.status(422).json({ message: 'Could not find report!' });
+  }
+
+  if (report.is_delete) {
+    return res
+      .status(404)
+      .json({ message: 'Could not find report specified by id!' });
+  }
+
+  try {
+    await Report.findByIdAndUpdate(report_id, { status });
+  } catch (error) {
+    return res.status(500).json({ message: 'Could not update report!' });
+  }
+
+  res.status(200).json({ message: 'Success', data: null });
+};
+
 export const updateReport = async (req, res) => {
   const {
     title,
@@ -134,7 +166,6 @@ export const updateReport = async (req, res) => {
     description,
     evidence,
     is_anonim,
-    status,
   } = req.body;
   const { report_id } = req.params;
 
@@ -156,22 +187,20 @@ export const updateReport = async (req, res) => {
       .json({ message: 'Could not find report specified by id!' });
   }
 
-  if (report.status !== 0 && !status) {
+  if (report.status !== 0) {
     return res.status(400).json({ message: 'Your report already processed!' });
   }
 
   try {
-    status
-      ? await Report.findByIdAndUpdate(report_id, { status })
-      : await Report.findByIdAndUpdate(report_id, {
-          title,
-          type,
-          place_report,
-          date_report,
-          description,
-          evidence,
-          is_anonim,
-        });
+    await Report.findByIdAndUpdate(report_id, {
+      title,
+      type,
+      place_report,
+      date_report,
+      description,
+      evidence,
+      is_anonim,
+    });
   } catch (error) {
     return res.status(500).json({ message: 'Could not update report!' });
   }
