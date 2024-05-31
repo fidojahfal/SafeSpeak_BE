@@ -7,7 +7,7 @@ import User from '../models/userModel.js';
 export const getAllReports = async (req, res) => {
   let reports;
   try {
-    reports = await Report.find({});
+    reports = await Report.find({ is_delete: false });
   } catch (error) {
     return res.status(500).json({ message: 'Could not find user!' });
   }
@@ -35,7 +35,11 @@ export const insertReport = async (req, res) => {
   let checkReport;
 
   try {
-    checkReport = await Report.findOne({ user_id: id, status: 0 });
+    checkReport = await Report.findOne({
+      user_id: id,
+      is_delete: false,
+      $or: [{ status: 0 }, { status: 1 }],
+    });
   } catch (error) {
     return res
       .status(500)
@@ -59,6 +63,7 @@ export const insertReport = async (req, res) => {
     is_anonim,
     user_id: id,
     status: 0,
+    is_delete: false,
   });
 
   try {
@@ -113,12 +118,43 @@ export const getReportsByUserId = async (req, res) => {
 
   let reports;
   try {
-    reports = await Report.find({ user_id });
+    reports = await Report.find({ user_id, is_delete: false });
   } catch (error) {
     return res.status(422).json({ message: 'Could not find user reports!' });
   }
 
   res.status(200).json({ message: 'Success', data: { reports } });
+};
+
+export const updateStatus = async (req, res) => {
+  const { status } = req.body;
+  const { report_id } = req.params;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(401).json({ message: 'Invalid input from user!' });
+  }
+
+  let report;
+  try {
+    report = await Report.findById(report_id);
+  } catch (error) {
+    return res.status(422).json({ message: 'Could not find report!' });
+  }
+
+  if (report.is_delete) {
+    return res
+      .status(404)
+      .json({ message: 'Could not find report specified by id!' });
+  }
+
+  try {
+    await Report.findByIdAndUpdate(report_id, { status });
+  } catch (error) {
+    return res.status(500).json({ message: 'Could not update report!' });
+  }
+
+  res.status(200).json({ message: 'Success', data: null });
 };
 
 export const updateReport = async (req, res) => {
@@ -130,7 +166,6 @@ export const updateReport = async (req, res) => {
     description,
     evidence,
     is_anonim,
-    status,
   } = req.body;
   const { report_id } = req.params;
 
@@ -146,22 +181,26 @@ export const updateReport = async (req, res) => {
     return res.status(422).json({ message: 'Could not find report!' });
   }
 
-  if (report.status !== 0 && !status) {
+  if (report.is_delete) {
+    return res
+      .status(404)
+      .json({ message: 'Could not find report specified by id!' });
+  }
+
+  if (report.status !== 0) {
     return res.status(400).json({ message: 'Your report already processed!' });
   }
 
   try {
-    status
-      ? await Report.findByIdAndUpdate(report_id, { status })
-      : await Report.findByIdAndUpdate(report_id, {
-          title,
-          type,
-          place_report,
-          date_report,
-          description,
-          evidence,
-          is_anonim,
-        });
+    await Report.findByIdAndUpdate(report_id, {
+      title,
+      type,
+      place_report,
+      date_report,
+      description,
+      evidence,
+      is_anonim,
+    });
   } catch (error) {
     return res.status(500).json({ message: 'Could not update report!' });
   }
@@ -183,7 +222,7 @@ export const deleteReport = async (req, res) => {
   }
 
   try {
-    await Report.findByIdAndDelete(report_id);
+    await Report.findByIdAndUpdate(report_id, { is_delete: true });
   } catch (error) {
     return res.status(500).json({ message: 'Could not delete report!' });
   }
