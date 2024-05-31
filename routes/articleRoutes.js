@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import authToken from '../middlewares/authToken.js';
-import { getAllArticles } from '../controllers/articleController.js';
+import {
+  getAllArticles,
+  insertArticle,
+} from '../controllers/articleController.js';
 
 const router = Router();
 
@@ -8,7 +11,7 @@ router.get('/', getAllArticles);
 
 router.use(authToken);
 
-router.post('/', () => {});
+router.post('/', insertArticle);
 router.put('/', () => {});
 
 export default router;

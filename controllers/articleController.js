@@ -10,3 +10,20 @@ export const getAllArticles = async (req, res) => {
   }
   res.status(200).json({ message: 'Success', data: { articles } });
 };
+
+export const insertArticle = async (req, res) => {
+  const { title, content, image } = req.body;
+
+  const newArticle = new Article({
+    title,
+    content,
+    image,
+  });
+
+  try {
+    await newArticle.save();
+  } catch (error) {
+    return res.status(500).json({ message: 'Could not save your article!' });
+  }
+  res.status(200).json({ message: 'Success', data: null });
+};
