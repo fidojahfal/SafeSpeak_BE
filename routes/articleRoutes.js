@@ -12,6 +12,6 @@ router.get('/', getAllArticles);
 router.use(authToken);
 
 router.post('/', insertArticle);
-router.put('/', () => {});
+router.put('/:article_id', () => {});
 
 export default router;
