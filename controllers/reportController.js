@@ -28,7 +28,6 @@ export const insertReport = async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
