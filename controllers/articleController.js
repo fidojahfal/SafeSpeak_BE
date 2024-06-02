@@ -13,7 +13,29 @@ export const getAllArticles = async (req, res) => {
 };
 
 export const insertArticle = async (req, res) => {
-  const { title, content, image } = req.body;
+  const { title, content } = req.body;
+  const file = req.file;
+
+  const formData = new FormData();
+  const blob = new Blob([file.buffer]);
+  formData.append('file', blob);
+  formData.append('upload_preset', `${process.env.CLOUD_TOKEN}`);
+
+  let uploadImage;
+  try {
+    uploadImage = await fetch(process.env.CLOUD_LINK, {
+      method: 'POST',
+      body: formData,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: 'Failed to upload image!' });
+  }
+
+  if (!uploadImage.ok) {
+    return res.status(400).json({ message: 'Failed to save your image!' });
+  }
+  const responseJson = await uploadImage.json();
+  const imageUrl = responseJson.secure_url;
 
   const errors = validationResult(req);
   if (!errors.isEmpty) {
@@ -23,7 +45,7 @@ export const insertArticle = async (req, res) => {
   const newArticle = new Article({
     title,
     content,
-    image,
+    image: imageUrl,
   });
 
   try {
