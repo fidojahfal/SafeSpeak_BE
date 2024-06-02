@@ -3,6 +3,7 @@ import transporter from '../mails/config.js';
 import templateMail from '../mails/template.js';
 import Report from '../models/reportModel.js';
 import User from '../models/userModel.js';
+import Mahasiswa from '../models/mahasiswaModel.js';
 
 export const getAllReports = async (req, res) => {
   let reports;
@@ -101,7 +102,23 @@ export const getReportById = async (req, res) => {
       '-password',
       '-role',
     ]);
+    const mahasiswa = await Mahasiswa.findOne({ user_id: report.user_id._id }, [
+      'name',
+      'nim',
+      '-_id',
+    ]);
+    report = {
+      ...report._doc,
+      user_id: {
+        _id: report.user_id._id,
+        nim: mahasiswa.nim,
+        name: mahasiswa.name,
+        username: report.user_id.username,
+        email: report.user_id.email,
+      },
+    };
   } catch (error) {
+    console.log(error);
     return res
       .status(422)
       .json({ message: 'Could not find specified report by id!' });
