@@ -90,7 +90,7 @@ export const insertReport = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: 'Could not send report email!' });
   }
-  res.status(201).json({ message: 'Success', data: null });
+  res.status(201).json({ message: 'Success', data: { newReport } });
 };
 
 export const getReportById = async (req, res) => {
