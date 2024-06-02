@@ -5,6 +5,7 @@ import {
   insertArticle,
   updateArticle,
 } from '../controllers/articleController.js';
+import { body } from 'express-validator';
 
 const router = Router();
 
@@ -12,7 +13,21 @@ router.get('/', getAllArticles);
 
 router.use(authToken);
 
-router.post('/', insertArticle);
-router.put('/:article_id', updateArticle);
+router.post(
+  '/',
+  [
+    body('title').isLength({ min: 1, max: 255 }),
+    body('content').isLength({ min: 1, max: 255 }),
+  ],
+  insertArticle
+);
+router.put(
+  '/:article_id',
+  [
+    body('title').isLength({ min: 1, max: 255 }),
+    body('content').isLength({ min: 1, max: 255 }),
+  ],
+  updateArticle
+);
 
 export default router;
