@@ -123,6 +123,13 @@ export const getReportById = async (req, res) => {
       .status(422)
       .json({ message: 'Could not find specified report by id!' });
   }
+
+  if (report.is_delete) {
+    return res
+      .status(404)
+      .json({ message: 'Could not find report specified by id!' });
+  }
+
   if (report.is_anonim) {
     report.user_id = report.user_id._id;
   }
