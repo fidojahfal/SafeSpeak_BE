@@ -25,7 +25,7 @@ export const insertArticle = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: 'Could not save your article!' });
   }
-  res.status(201).json({ message: 'Success', data: null });
+  res.status(201).json({ message: 'Success', data: { newArticle } });
 };
 
 export const updateArticle = async (req, res) => {
