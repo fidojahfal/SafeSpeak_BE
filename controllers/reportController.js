@@ -1,9 +1,9 @@
 import { validationResult } from 'express-validator';
-import transporter from '../mails/config.js';
-import templateMail from '../mails/template.js';
+
 import Report from '../models/reportModel.js';
 import User from '../models/userModel.js';
 import Mahasiswa from '../models/mahasiswaModel.js';
+import sendEmail from '../mails/sendEmail.js';
 
 export const getAllReports = async (req, res) => {
   let reports;
@@ -79,17 +79,10 @@ export const insertReport = async (req, res) => {
     return res.status(422).json({ message: 'Could not find user!' });
   }
 
-  const message = {
-    from: '<safespeakteams>@gmail.com',
-    to: user.email,
-    subject: 'Your reports',
-    html: templateMail,
-  };
   try {
-    await transporter.sendMail(message);
-  } catch (error) {
-    return res.status(500).json({ message: 'Could not send report email!' });
-  }
+    await sendEmail(0, user.email);
+    await sendEmail(1, 'udonotmatter@gmail.com');
+  } catch (error) {}
   res.status(201).json({ message: 'Success', data: { report: newReport } });
 };
 
