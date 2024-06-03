@@ -5,7 +5,7 @@ export const getAllArticles = async (req, res) => {
   let articles;
 
   try {
-    articles = await Article.find();
+    articles = await Article.find({ is_delete: false });
   } catch (error) {
     return res.status(500).json({ message: 'Could not find articles!' });
   }
@@ -46,6 +46,7 @@ export const insertArticle = async (req, res) => {
     title,
     content,
     image: imageUrl,
+    is_delete: false,
   });
 
   try {
@@ -68,14 +69,30 @@ export const updateArticle = async (req, res) => {
   let article;
 
   try {
-    article = await Article.findByIdAndUpdate(article_id, { title, content });
+    article = await Article.findById(article_id);
   } catch (error) {
     return res
       .status(422)
       .json({ message: 'Could not find article specified by id' });
   }
 
-  res.status(200).json({ message: 'Success', data: { article } });
+  if (article.is_delete) {
+    return res.status(400).json({
+      message:
+        "Can't edit your article, please make sure you still have article specified by id!",
+    });
+  }
+  console.log(req.body);
+
+  try {
+    await Article.findByIdAndUpdate(article_id, { title, content });
+  } catch (error) {
+    return res
+      .status(422)
+      .json({ message: 'Could not find article specified by id' });
+  }
+
+  res.status(200).json({ message: 'Success', data: null });
 };
 
 export const deleteArticle = async (req, res) => {
