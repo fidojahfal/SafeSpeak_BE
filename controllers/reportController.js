@@ -69,6 +69,7 @@ export const insertReport = async (req, res) => {
   try {
     await newReport.save();
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: 'Could not save report!' });
   }
 
@@ -143,7 +144,7 @@ export const getReportsByUserId = async (req, res) => {
 };
 
 export const updateStatus = async (req, res) => {
-  const { status } = req.body;
+  const { status, reason } = req.body;
   const { report_id } = req.params;
 
   const errors = validationResult(req);
@@ -164,8 +165,12 @@ export const updateStatus = async (req, res) => {
       .json({ message: 'Could not find report specified by id!' });
   }
 
+  if (status === 3 && !reason) {
+    return res.status(404).json({ message: 'Please add your reject reason!' });
+  }
+
   try {
-    await Report.findByIdAndUpdate(report_id, { status });
+    await Report.findByIdAndUpdate(report_id, { status, reason });
   } catch (error) {
     return res.status(500).json({ message: 'Could not update report!' });
   }
