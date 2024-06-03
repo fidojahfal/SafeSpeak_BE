@@ -36,4 +36,6 @@ router.put(
   updateArticle
 );
 
+router.delete('/:article_id', () => {});
+
 export default router;
