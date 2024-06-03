@@ -12,6 +12,28 @@ export const getAllArticles = async (req, res) => {
   res.status(200).json({ message: 'Success', data: { articles } });
 };
 
+export const getArticleById = async (req, res) => {
+  const { article_id } = req.params;
+  let article;
+
+  try {
+    article = await Article.findById(article_id);
+  } catch (error) {
+    return res
+      .status(422)
+      .json({ message: "Can't find article specified by id!" });
+  }
+
+  if (article.is_delete) {
+    return res.status(400).json({
+      message:
+        "Can't find your article, please make sure you article is not deleted!",
+    });
+  }
+
+  res.status(200).json({ message: 'Success', data: { article } });
+};
+
 export const insertArticle = async (req, res) => {
   const { title, content } = req.body;
   const file = req.file;
