@@ -1,8 +1,9 @@
 import { validationResult } from 'express-validator';
-import transporter from '../mails/config.js';
-import templateMail from '../mails/template.js';
+
 import Report from '../models/reportModel.js';
 import User from '../models/userModel.js';
+import Mahasiswa from '../models/mahasiswaModel.js';
+import sendEmail from '../mails/sendEmail.js';
 
 export const getAllReports = async (req, res) => {
   let reports;
@@ -68,6 +69,7 @@ export const insertReport = async (req, res) => {
   try {
     await newReport.save();
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: 'Could not save report!' });
   }
 
@@ -78,17 +80,10 @@ export const insertReport = async (req, res) => {
     return res.status(422).json({ message: 'Could not find user!' });
   }
 
-  const message = {
-    from: '<safespeakteams>@gmail.com',
-    to: user.email,
-    subject: 'Your reports',
-    html: templateMail,
-  };
   try {
-    await transporter.sendMail(message);
-  } catch (error) {
-    return res.status(500).json({ message: 'Could not send report email!' });
-  }
+    await sendEmail(0, user.email);
+    await sendEmail(1, 'udonotmatter@gmail.com');
+  } catch (error) {}
   res.status(201).json({ message: 'Success', data: { report: newReport } });
 };
 
@@ -101,11 +96,34 @@ export const getReportById = async (req, res) => {
       '-password',
       '-role',
     ]);
+    const mahasiswa = await Mahasiswa.findOne({ user_id: report.user_id._id }, [
+      'name',
+      'nim',
+      '-_id',
+    ]);
+    report = {
+      ...report._doc,
+      user_id: {
+        _id: report.user_id._id,
+        nim: mahasiswa.nim,
+        name: mahasiswa.name,
+        username: report.user_id.username,
+        email: report.user_id.email,
+      },
+    };
   } catch (error) {
+    console.log(error);
     return res
       .status(422)
       .json({ message: 'Could not find specified report by id!' });
   }
+
+  if (report.is_delete) {
+    return res
+      .status(404)
+      .json({ message: 'Could not find report specified by id!' });
+  }
+
   if (report.is_anonim) {
     report.user_id = report.user_id._id;
   }
@@ -126,7 +144,7 @@ export const getReportsByUserId = async (req, res) => {
 };
 
 export const updateStatus = async (req, res) => {
-  const { status } = req.body;
+  const { status, reason } = req.body;
   const { report_id } = req.params;
 
   const errors = validationResult(req);
@@ -147,8 +165,12 @@ export const updateStatus = async (req, res) => {
       .json({ message: 'Could not find report specified by id!' });
   }
 
+  if (status === 3 && !reason) {
+    return res.status(404).json({ message: 'Please add your reject reason!' });
+  }
+
   try {
-    await Report.findByIdAndUpdate(report_id, { status });
+    await Report.findByIdAndUpdate(report_id, { status, reason });
   } catch (error) {
     return res.status(500).json({ message: 'Could not update report!' });
   }

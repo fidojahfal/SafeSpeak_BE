@@ -12,6 +12,7 @@ const reportSchema = new mongoose.Schema({
   status: { type: Number, required: true },
   is_delete: { type: Boolean, required: true },
   created_at: { type: Date, required: true, default: Date.now },
+  reason: { type: String, required: false, default: '' },
 });
 
 const Report = mongoose.model('report', reportSchema);

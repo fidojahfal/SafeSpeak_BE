@@ -102,13 +102,13 @@ export const register = async (req, res) => {
 
   let user;
   try {
-    user = await User.findOne({ username, email });
+    user = await User.findOne({ username });
   } catch (error) {
     return res.status(500).json({ message: 'Could not find user!' });
   }
 
   if (user) {
-    return res.status(402).json({ message: 'User already registered' });
+    return res.status(402).json({ message: 'Username already registered' });
   }
 
   let hashedPassword;
