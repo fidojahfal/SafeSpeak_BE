@@ -102,7 +102,17 @@ export const register = async (req, res) => {
 
   let user;
   try {
-    user = await User.findOne({ username, email });
+    user = await User.findOne({ $or: [{ username }, { email }] });
+  } catch (error) {
+    return res.status(500).json({ message: 'Could not find user!' });
+  }
+
+  if (user) {
+    return res.status(402).json({ message: 'User already registered' });
+  }
+
+  try {
+    user = await Mahasiswa.findOne({ nim });
   } catch (error) {
     return res.status(500).json({ message: 'Could not find user!' });
   }
