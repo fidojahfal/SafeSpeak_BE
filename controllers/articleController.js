@@ -77,3 +77,15 @@ export const updateArticle = async (req, res) => {
 
   res.status(200).json({ message: 'Success', data: { article } });
 };
+
+export const deleteArticle = async (req, res) => {
+  const { article_id } = req.params;
+
+  try {
+    await Article.findByIdAndUpdate(article_id, { is_delete: true });
+  } catch (error) {
+    return res.status(500).json({ message: 'Failed to delete the article!' });
+  }
+
+  res.status(200).json({ message: 'Success', data: null });
+};

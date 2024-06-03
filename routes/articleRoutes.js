@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import authToken from '../middlewares/authToken.js';
 import {
+  deleteArticle,
   getAllArticles,
   insertArticle,
   updateArticle,
@@ -36,6 +37,6 @@ router.put(
   updateArticle
 );
 
-router.delete('/:article_id', () => {});
+router.delete('/:article_id', deleteArticle);
 
 export default router;
