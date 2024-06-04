@@ -96,14 +96,6 @@ export const getReportById = async (req, res) => {
       '-password',
       '-role',
     ]);
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(422)
-      .json({ message: 'Could not find specified report by id!' });
-  }
-
-  try {
     const mahasiswa = await Mahasiswa.findOne({ user_id: report.user_id._id }, [
       'name',
       'nim',
