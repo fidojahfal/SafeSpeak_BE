@@ -104,7 +104,6 @@ export const updateArticle = async (req, res) => {
         "Can't edit your article, please make sure you still have article specified by id!",
     });
   }
-  console.log(req.body);
 
   try {
     await Article.findByIdAndUpdate(article_id, { title, content });

@@ -69,7 +69,6 @@ export const insertReport = async (req, res) => {
   try {
     await newReport.save();
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: 'Could not save report!' });
   }
 
@@ -112,7 +111,6 @@ export const getReportById = async (req, res) => {
       },
     };
   } catch (error) {
-    console.log(error);
     return res
       .status(422)
       .json({ message: 'Could not find specified report by id!' });
