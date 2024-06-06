@@ -5,6 +5,7 @@ import {
   getAllArticles,
   insertArticle,
   updateArticle,
+  getArticleById,
 } from '../controllers/articleController.js';
 import { body } from 'express-validator';
 import multer from 'multer';
@@ -18,6 +19,8 @@ const upload = multer({
 router.get('/', getAllArticles);
 
 router.use(authToken);
+
+router.get('/:article_id', getArticleById);
 
 router.post(
   '/',
