@@ -37,6 +37,7 @@ router.put(
     body('title').isLength({ min: 1, max: 255 }),
     body('content').isLength({ min: 1, max: 255 }),
   ],
+  upload.single('image'),
   updateArticle
 );
 

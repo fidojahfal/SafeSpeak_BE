@@ -45,7 +45,7 @@ export const insertArticle = async (req, res) => {
 
   let uploadImage;
   try {
-    uploadImage = await fetch(process.env.CLOUD_LINK, {
+    uploadImage = await fetch(process.env.CLOUD_LINK_UPLOAD, {
       method: 'POST',
       body: formData,
     });
@@ -82,6 +82,7 @@ export const insertArticle = async (req, res) => {
 export const updateArticle = async (req, res) => {
   const { title, content } = req.body;
   const { article_id } = req.params;
+  const image = req.file;
 
   const errors = validationResult(req);
   if (!errors.isEmpty) {
@@ -103,6 +104,30 @@ export const updateArticle = async (req, res) => {
       message:
         "Can't edit your article, please make sure you still have article specified by id!",
     });
+  }
+
+  if (typeof image === 'object') {
+    const publicId = article.image.split('/').slice(-1)[0].split('.')[0];
+    const formData = new FormData();
+    let deleteImage;
+    formData.append('public_ids[]', [publicId]);
+    // formData.append('api_key', process.env.CLOUD_API_KEY);
+    // formData.append('signature', 'aaaaaa');
+    // formData.append('timestamp', Date.now());
+
+    try {
+      deleteImage = await fetch(process.env.CLOUD_LINK_DELETE, {
+        method: 'DELETE',
+        body: formData,
+      });
+    } catch (error) {
+      return res.status(500).json({ message: 'Failed to delete image!' });
+    }
+
+    if (!deleteImage.ok) {
+      console.log(await deleteImage.json());
+      return res.status(400).json({ message: "Your image can't be deleted!" });
+    }
   }
 
   try {
