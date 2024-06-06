@@ -80,9 +80,19 @@ export const insertReport = async (req, res) => {
   }
 
   try {
-    await sendEmail(0, user.email);
-    await sendEmail(1, 'udonotmatter@gmail.com');
-  } catch (error) {}
+    const mahasiswa =
+      !is_anonim && (await Mahasiswa.findOne({ user_id: id }, ['name']));
+    await sendEmail({ role: 0, email: user.email });
+    is_anonim
+      ? await sendEmail({ role: 1, email: 'udonotmatter@gmail.com' })
+      : await sendEmail({
+          role: 1,
+          email: 'udonotmatter@gmail.com',
+          name: mahasiswa.name,
+        });
+  } catch (error) {
+    return res.status(500).json({ message: 'Failed to send email.' });
+  }
   res.status(201).json({ message: 'Success', data: { report: newReport } });
 };
 
@@ -171,6 +181,13 @@ export const updateStatus = async (req, res) => {
     await Report.findByIdAndUpdate(report_id, { status, reason });
   } catch (error) {
     return res.status(500).json({ message: 'Could not update report!' });
+  }
+
+  try {
+    const user = await User.findById(report.user_id, 'email');
+    await sendEmail({ role: 0, email: user.email, status });
+  } catch (error) {
+    return res.status(500).json({ message: 'Failed to send email.' });
   }
 
   res.status(200).json({ message: 'Success', data: null });
