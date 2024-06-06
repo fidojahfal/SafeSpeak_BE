@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator';
 import Article from '../models/articleModel.js';
+import cloudinary from '../upload/cloudinary.js';
 
 export const getAllArticles = async (req, res) => {
   let articles;
@@ -37,27 +38,13 @@ export const getArticleById = async (req, res) => {
 export const insertArticle = async (req, res) => {
   const { title, content } = req.body;
   const file = req.file;
+  let imageUrl;
 
-  const formData = new FormData();
-  const blob = new Blob([file.buffer]);
-  formData.append('file', blob);
-  formData.append('upload_preset', `${process.env.CLOUD_TOKEN}`);
-
-  let uploadImage;
   try {
-    uploadImage = await fetch(process.env.CLOUD_LINK_UPLOAD, {
-      method: 'POST',
-      body: formData,
-    });
+    imageUrl = await cloudinary('upload', req.file);
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to upload image!' });
+    return res.status(500).json({ message: error.message });
   }
-
-  if (!uploadImage.ok) {
-    return res.status(400).json({ message: 'Failed to save your image!' });
-  }
-  const responseJson = await uploadImage.json();
-  const imageUrl = responseJson.secure_url;
 
   const errors = validationResult(req);
   if (!errors.isEmpty) {
@@ -108,25 +95,11 @@ export const updateArticle = async (req, res) => {
 
   if (typeof image === 'object') {
     const publicId = article.image.split('/').slice(-1)[0].split('.')[0];
-    const formData = new FormData();
-    let deleteImage;
-    formData.append('public_ids[]', [publicId]);
-    // formData.append('api_key', process.env.CLOUD_API_KEY);
-    // formData.append('signature', 'aaaaaa');
-    // formData.append('timestamp', Date.now());
 
     try {
-      deleteImage = await fetch(process.env.CLOUD_LINK_DELETE, {
-        method: 'DELETE',
-        body: formData,
-      });
+      await cloudinary('replace', image, publicId);
     } catch (error) {
-      return res.status(500).json({ message: 'Failed to delete image!' });
-    }
-
-    if (!deleteImage.ok) {
-      console.log(await deleteImage.json());
-      return res.status(400).json({ message: "Your image can't be deleted!" });
+      return res.status(400).json({ message: 'Could not upload your image!' });
     }
   }
 
