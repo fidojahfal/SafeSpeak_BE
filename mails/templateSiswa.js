@@ -614,157 +614,1993 @@ function templateMailSiswa(status) {
 </html>
 `;
     case 1:
-      return `<!DOCTYPE html>
-<html lang="en">
+      return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
   <head>
-    <meta charset="UTF-8" />
+    <!--[if gte mso 9]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG />
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <title>SafeSpeak - Ditindaklanjuti Email</title>
-  </head>
-  <style>
-    @media (max-width: 576px) { 
-        .illustration {
-            width: 300px;
+    <meta name="x-apple-disable-message-reformatting" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <title></title>
+
+    <style type="text/css">
+      @media only screen and (min-width: 520px) {
+        .u-row {
+          width: 500px !important;
         }
-    }
-  </style>
-  <body style="background-color: #fff8e3">
-    <div
-      style="box-shadow: 0px 2px rgba(0, 0, 0, 0.1); background-color: white;"
+        .u-row .u-col {
+          vertical-align: top;
+        }
+        .u-row .u-col-100 {
+          width: 500px !important;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .u-row-container {
+          max-width: 100% !important;
+          padding-left: 0px !important;
+          padding-right: 0px !important;
+        }
+        .u-row .u-col {
+          min-width: 320px !important;
+          max-width: 100% !important;
+          display: block !important;
+        }
+        .u-row {
+          width: 100% !important;
+        }
+        .u-col {
+          width: 100% !important;
+        }
+        .u-col > div {
+          margin: 0 auto;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      table,
+      tr,
+      td {
+        vertical-align: top;
+        border-collapse: collapse;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .ie-container table,
+      .mso-container table {
+        table-layout: fixed;
+      }
+
+      * {
+        line-height: inherit;
+      }
+
+      a[x-apple-data-detectors="true"] {
+        color: inherit !important;
+        text-decoration: none !important;
+      }
+
+      table,
+      td {
+        color: #000000;
+      }
+
+      #u_body a {
+        color: #0000ee;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body
+    class="clean-body u_body"
+    style="
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      background-color: #ffffff;
+      color: #000000;
+    "
+  >
+    <!--[if IE]><div class="ie-container"><![endif]-->
+    <!--[if mso]><div class="mso-container"><![endif]-->
+    <table
+      id="u_body"
+      style="
+        border-collapse: collapse;
+        table-layout: fixed;
+        border-spacing: 0;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        vertical-align: top;
+        min-width: 320px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        width: 100%;
+      "
+      cellpadding="0"
+      cellspacing="0"
     >
-      <img
-        src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/SafeSpeak-LogoWord_lolmgp.png"
-        alt="SafeSpeak Logo"
-        style="width: 150px"
-        class="m-2"
-      />
-    </div>
-    <div class="card m-4 p-3">
-        <div class="card-body d-flex flex-column align-items-center">
-          <img
-            src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680603/Group_183_etgf70.png"
-            alt="Read Icon"
-            style="width: 100px"
-          />
-          <h1 class="text-primary m-3">Ditindaklanjuti</h1>
-          <p class="fs-5 text-center">
-            Dosen sudah mereviu laporan dan akan mengontak anda via email/ nomor telepon untuk penindaklanjutan. </br>
-            <strong>Silahkan email ke <a href="mailto:safespeak@gmail.com" class="fw-bold text-primary">safespeak@gmail.com</a> jika tidak kunjung dikontak.</strong>
-          </p>
-          <img class="illustration" src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/Beranda-Dosen-1_wswaje.png" alt="Illustration of a teacher helping a student">
-        </div>
-      </div>
-    </div>
+      <tbody>
+        <tr style="vertical-align: top">
+          <td
+            style="
+              word-break: break-word;
+              border-collapse: collapse !important;
+              vertical-align: top;
+            "
+          >
+            <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #ffffff;"><![endif]-->
+
+            <div
+              class="u-row-container"
+              style="padding: 0px; background-color: transparent"
+            >
+              <div
+                class="u-row"
+                style="
+                  margin: 0 auto;
+                  min-width: 320px;
+                  max-width: 500px;
+                  overflow-wrap: break-word;
+                  word-wrap: break-word;
+                  word-break: break-word;
+                  background-color: transparent;
+                "
+              >
+                <div
+                  style="
+                    border-collapse: collapse;
+                    display: table;
+                    width: 100%;
+                    height: 100%;
+                    background-color: transparent;
+                  "
+                >
+                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:500px;"><tr style="background-color: transparent;"><![endif]-->
+
+                  <!--[if (mso)|(IE)]><td align="center" width="500" style="width: 500px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                  <div
+                    class="u-col u-col-100"
+                    style="
+                      max-width: 320px;
+                      min-width: 500px;
+                      display: table-cell;
+                      vertical-align: top;
+                    "
+                  >
+                    <div style="height: 100%; width: 100% !important">
+                      <!--[if (!mso)&(!IE)]><!-->
+                      <div
+                        style="
+                          box-sizing: border-box;
+                          height: 100%;
+                          padding: 0px;
+                          border-top: 0px solid transparent;
+                          border-left: 0px solid transparent;
+                          border-right: 0px solid transparent;
+                          border-bottom: 0px solid transparent;
+                        "
+                      >
+                        <!--<![endif]-->
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="left"
+                                    >
+                                      <img
+                                        align="left"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717727645054-SafeSpeak-LogoWord.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 29%;
+                                          max-width: 139.2px;
+                                        "
+                                        width="139.2"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  height="0px"
+                                  align="center"
+                                  border="0"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  width="100%"
+                                  style="
+                                    border-collapse: collapse;
+                                    table-layout: fixed;
+                                    border-spacing: 0;
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    vertical-align: top;
+                                    border-top: 1px solid #bbbbbb;
+                                    -ms-text-size-adjust: 100%;
+                                    -webkit-text-size-adjust: 100%;
+                                  "
+                                >
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td
+                                        style="
+                                          word-break: break-word;
+                                          border-collapse: collapse !important;
+                                          vertical-align: top;
+                                          font-size: 0px;
+                                          line-height: 0px;
+                                          mso-line-height-rule: exactly;
+                                          -ms-text-size-adjust: 100%;
+                                          -webkit-text-size-adjust: 100%;
+                                        "
+                                      >
+                                        <span>&#160;</span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="center"
+                                    >
+                                      <img
+                                        align="center"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717903334729-Group%20183.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 22%;
+                                          max-width: 105.6px;
+                                        "
+                                        width="105.6"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <div
+                                  style="
+                                    font-size: 25px;
+                                    color: #106ee8;
+                                    line-height: 140%;
+                                    text-align: center;
+                                    word-wrap: break-word;
+                                  "
+                                >
+                                  <p style="line-height: 140%">
+                                    <strong>Ditindaklanjuti</strong>
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <div
+                                  style="
+                                    font-size: 14px;
+                                    line-height: 140%;
+                                    text-align: center;
+                                    word-wrap: break-word;
+                                  "
+                                >
+                                  <p style="line-height: 140%">
+                                    <span
+                                      style="
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        float: none;
+                                        display: inline;
+                                        line-height: 19.6px;
+                                      "
+                                      >Dosen sudah mereviu laporan dan akan
+                                      mengontak anda via email/ nomor telepon
+                                      untuk penindaklanjutan.</span
+                                    >
+                                    <br
+                                      style="
+                                        box-sizing: border-box;
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                      "
+                                    /><strong
+                                      style="
+                                        box-sizing: border-box;
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                      "
+                                      >Silahkan email ke
+                                      <a
+                                        style="
+                                          box-sizing: border-box;
+                                          text-decoration-line: underline;
+                                          color: rgba(
+                                            var(--bs-primary-rgb),
+                                            var(--bs-text-opacity)
+                                          );
+                                        "
+                                        href="mailto:safespeak@gmail.com"
+                                        class="fw-bold text-primary"
+                                        >safespeak@gmail.com</a
+                                      >&nbsp;jika tidak kunjung
+                                      dikontak.</strong
+                                    >
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="center"
+                                    >
+                                      <img
+                                        align="center"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717727825799-Beranda-Dosen-1.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 71%;
+                                          max-width: 340.8px;
+                                        "
+                                        width="340.8"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  height="0px"
+                                  align="center"
+                                  border="0"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  width="100%"
+                                  style="
+                                    border-collapse: collapse;
+                                    table-layout: fixed;
+                                    border-spacing: 0;
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    vertical-align: top;
+                                    border-top: 1px solid #bbbbbb;
+                                    -ms-text-size-adjust: 100%;
+                                    -webkit-text-size-adjust: 100%;
+                                  "
+                                >
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td
+                                        style="
+                                          word-break: break-word;
+                                          border-collapse: collapse !important;
+                                          vertical-align: top;
+                                          font-size: 0px;
+                                          line-height: 0px;
+                                          mso-line-height-rule: exactly;
+                                          -ms-text-size-adjust: 100%;
+                                          -webkit-text-size-adjust: 100%;
+                                        "
+                                      >
+                                        <span>&#160;</span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <!--[if (!mso)&(!IE)]><!-->
+                      </div>
+                      <!--<![endif]-->
+                    </div>
+                  </div>
+                  <!--[if (mso)|(IE)]></td><![endif]-->
+                  <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                </div>
+              </div>
+            </div>
+
+            <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--[if mso]></div><![endif]-->
+    <!--[if IE]></div><![endif]-->
   </body>
 </html>
+
 `;
     case 2:
-      return `<!DOCTYPE html>
-<html lang="en">
+      return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
   <head>
-    <meta charset="UTF-8" />
+    <!--[if gte mso 9]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG />
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <title>SafeSpeak - Selesai Email</title>
-  </head>
-  <style>
-    @media (max-width: 576px) { 
-        .illustration {
-            width: 300px;
+    <meta name="x-apple-disable-message-reformatting" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <title></title>
+
+    <style type="text/css">
+      @media only screen and (min-width: 520px) {
+        .u-row {
+          width: 500px !important;
         }
-    }
-  </style>
-  <body style="background-color: #fff8e3">
-    <div
-      style="box-shadow: 0px 2px rgba(0, 0, 0, 0.1); background-color: white;"
+        .u-row .u-col {
+          vertical-align: top;
+        }
+        .u-row .u-col-100 {
+          width: 500px !important;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .u-row-container {
+          max-width: 100% !important;
+          padding-left: 0px !important;
+          padding-right: 0px !important;
+        }
+        .u-row .u-col {
+          min-width: 320px !important;
+          max-width: 100% !important;
+          display: block !important;
+        }
+        .u-row {
+          width: 100% !important;
+        }
+        .u-col {
+          width: 100% !important;
+        }
+        .u-col > div {
+          margin: 0 auto;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      table,
+      tr,
+      td {
+        vertical-align: top;
+        border-collapse: collapse;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .ie-container table,
+      .mso-container table {
+        table-layout: fixed;
+      }
+
+      * {
+        line-height: inherit;
+      }
+
+      a[x-apple-data-detectors="true"] {
+        color: inherit !important;
+        text-decoration: none !important;
+      }
+
+      table,
+      td {
+        color: #000000;
+      }
+
+      #u_body a {
+        color: #0000ee;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body
+    class="clean-body u_body"
+    style="
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      background-color: #ffffff;
+      color: #000000;
+    "
+  >
+    <!--[if IE]><div class="ie-container"><![endif]-->
+    <!--[if mso]><div class="mso-container"><![endif]-->
+    <table
+      id="u_body"
+      style="
+        border-collapse: collapse;
+        table-layout: fixed;
+        border-spacing: 0;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        vertical-align: top;
+        min-width: 320px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        width: 100%;
+      "
+      cellpadding="0"
+      cellspacing="0"
     >
-      <img
-        src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/SafeSpeak-LogoWord_lolmgp.png"
-        alt="SafeSpeak Logo"
-        style="width: 150px"
-        class="m-2"
-      />
-    </div>
-    <div class="card m-4 p-3">
-        <div class="card-body d-flex flex-column align-items-center">
-          <img
-            src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/Group_185_mhsi4g.png"
-            alt="Thumbs Up Icon"
-            style="width: 100px"
-          />
-          <h1 class="m-3" style="color: #198754;">Selesai</h1>
-          <p class="fs-5 text-center">
-            Laporan sudah ditindaklanjuti dan ditandakan selesai.</br>
-            <strong>Jika anda merasa ini adalah kesalahan</strong>, silahkan email ke <a href="mailto:safespeak@gmail.com" class="fw-bold text-primary">safespeak@gmail.com</a>.
-          </p>
-          <img class="illustration" src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/Beranda-Dosen-1_wswaje.png" alt="Illustration of a teacher helping a student">
-        </div>
-      </div>
-    </div>
+      <tbody>
+        <tr style="vertical-align: top">
+          <td
+            style="
+              word-break: break-word;
+              border-collapse: collapse !important;
+              vertical-align: top;
+            "
+          >
+            <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #ffffff;"><![endif]-->
+
+            <div
+              class="u-row-container"
+              style="padding: 0px; background-color: transparent"
+            >
+              <div
+                class="u-row"
+                style="
+                  margin: 0 auto;
+                  min-width: 320px;
+                  max-width: 500px;
+                  overflow-wrap: break-word;
+                  word-wrap: break-word;
+                  word-break: break-word;
+                  background-color: transparent;
+                "
+              >
+                <div
+                  style="
+                    border-collapse: collapse;
+                    display: table;
+                    width: 100%;
+                    height: 100%;
+                    background-color: transparent;
+                  "
+                >
+                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:500px;"><tr style="background-color: transparent;"><![endif]-->
+
+                  <!--[if (mso)|(IE)]><td align="center" width="500" style="width: 500px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                  <div
+                    class="u-col u-col-100"
+                    style="
+                      max-width: 320px;
+                      min-width: 500px;
+                      display: table-cell;
+                      vertical-align: top;
+                    "
+                  >
+                    <div style="height: 100%; width: 100% !important">
+                      <!--[if (!mso)&(!IE)]><!-->
+                      <div
+                        style="
+                          box-sizing: border-box;
+                          height: 100%;
+                          padding: 0px;
+                          border-top: 0px solid transparent;
+                          border-left: 0px solid transparent;
+                          border-right: 0px solid transparent;
+                          border-bottom: 0px solid transparent;
+                        "
+                      >
+                        <!--<![endif]-->
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="left"
+                                    >
+                                      <img
+                                        align="left"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717727645054-SafeSpeak-LogoWord.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 29%;
+                                          max-width: 139.2px;
+                                        "
+                                        width="139.2"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  height="0px"
+                                  align="center"
+                                  border="0"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  width="100%"
+                                  style="
+                                    border-collapse: collapse;
+                                    table-layout: fixed;
+                                    border-spacing: 0;
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    vertical-align: top;
+                                    border-top: 1px solid #bbbbbb;
+                                    -ms-text-size-adjust: 100%;
+                                    -webkit-text-size-adjust: 100%;
+                                  "
+                                >
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td
+                                        style="
+                                          word-break: break-word;
+                                          border-collapse: collapse !important;
+                                          vertical-align: top;
+                                          font-size: 0px;
+                                          line-height: 0px;
+                                          mso-line-height-rule: exactly;
+                                          -ms-text-size-adjust: 100%;
+                                          -webkit-text-size-adjust: 100%;
+                                        "
+                                      >
+                                        <span>&#160;</span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="center"
+                                    >
+                                      <img
+                                        align="center"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717903745994-Group%20185.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 22%;
+                                          max-width: 105.6px;
+                                        "
+                                        width="105.6"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <div
+                                  style="
+                                    font-size: 25px;
+                                    color: #1b7b3d;
+                                    line-height: 140%;
+                                    text-align: center;
+                                    word-wrap: break-word;
+                                  "
+                                >
+                                  <p style="line-height: 140%">
+                                    <strong>Selesai</strong>
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <div
+                                  style="
+                                    font-size: 14px;
+                                    line-height: 140%;
+                                    text-align: center;
+                                    word-wrap: break-word;
+                                  "
+                                >
+                                  <p style="line-height: 140%">
+                                    <span
+                                      style="
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        float: none;
+                                        display: inline;
+                                        line-height: 19.6px;
+                                      "
+                                      >Laporan sudah ditindaklanjuti dan
+                                      ditandakan selesai.</span
+                                    ><br
+                                      style="
+                                        box-sizing: border-box;
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                      "
+                                    />
+                                    <strong
+                                      style="
+                                        box-sizing: border-box;
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                      "
+                                      >Jika anda merasa ini adalah
+                                      kesalahan</strong
+                                    ><span
+                                      style="
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        float: none;
+                                        display: inline;
+                                        line-height: 19.6px;
+                                      "
+                                      >, silahkan email ke
+                                    </span>
+                                    <a
+                                      style="
+                                        box-sizing: border-box;
+                                        text-decoration-line: underline;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        color: rgba(
+                                          var(--bs-primary-rgb),
+                                          var(--bs-text-opacity)
+                                        );
+                                      "
+                                      href="mailto:safespeak@gmail.com"
+                                      class="fw-bold text-primary"
+                                      >safespeak@gmail.com</a
+                                    ><span
+                                      style="
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        float: none;
+                                        display: inline;
+                                        line-height: 19.6px;
+                                      "
+                                      >.</span
+                                    >
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="center"
+                                    >
+                                      <img
+                                        align="center"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717727825799-Beranda-Dosen-1.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 71%;
+                                          max-width: 340.8px;
+                                        "
+                                        width="340.8"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  height="0px"
+                                  align="center"
+                                  border="0"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  width="100%"
+                                  style="
+                                    border-collapse: collapse;
+                                    table-layout: fixed;
+                                    border-spacing: 0;
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    vertical-align: top;
+                                    border-top: 1px solid #bbbbbb;
+                                    -ms-text-size-adjust: 100%;
+                                    -webkit-text-size-adjust: 100%;
+                                  "
+                                >
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td
+                                        style="
+                                          word-break: break-word;
+                                          border-collapse: collapse !important;
+                                          vertical-align: top;
+                                          font-size: 0px;
+                                          line-height: 0px;
+                                          mso-line-height-rule: exactly;
+                                          -ms-text-size-adjust: 100%;
+                                          -webkit-text-size-adjust: 100%;
+                                        "
+                                      >
+                                        <span>&#160;</span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <!--[if (!mso)&(!IE)]><!-->
+                      </div>
+                      <!--<![endif]-->
+                    </div>
+                  </div>
+                  <!--[if (mso)|(IE)]></td><![endif]-->
+                  <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                </div>
+              </div>
+            </div>
+
+            <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--[if mso]></div><![endif]-->
+    <!--[if IE]></div><![endif]-->
   </body>
 </html>
 `;
     case 3:
-      return `<!DOCTYPE html>
-<html lang="en">
+      return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
   <head>
-    <meta charset="UTF-8" />
+    <!--[if gte mso 9]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG />
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <title>SafeSpeak - Ditolak Email</title>
-  </head>
-  <style>
-    @media (max-width: 576px) { 
-        .illustration {
-            width: 300px;
+    <meta name="x-apple-disable-message-reformatting" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <title></title>
+
+    <style type="text/css">
+      @media only screen and (min-width: 520px) {
+        .u-row {
+          width: 500px !important;
         }
-    }
-  </style>
-  <body style="background-color: #fff8e3">
-    <div
-      style="box-shadow: 0px 2px rgba(0, 0, 0, 0.1); background-color: white;"
+        .u-row .u-col {
+          vertical-align: top;
+        }
+        .u-row .u-col-100 {
+          width: 500px !important;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .u-row-container {
+          max-width: 100% !important;
+          padding-left: 0px !important;
+          padding-right: 0px !important;
+        }
+        .u-row .u-col {
+          min-width: 320px !important;
+          max-width: 100% !important;
+          display: block !important;
+        }
+        .u-row {
+          width: 100% !important;
+        }
+        .u-col {
+          width: 100% !important;
+        }
+        .u-col > div {
+          margin: 0 auto;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      table,
+      tr,
+      td {
+        vertical-align: top;
+        border-collapse: collapse;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .ie-container table,
+      .mso-container table {
+        table-layout: fixed;
+      }
+
+      * {
+        line-height: inherit;
+      }
+
+      a[x-apple-data-detectors="true"] {
+        color: inherit !important;
+        text-decoration: none !important;
+      }
+
+      table,
+      td {
+        color: #000000;
+      }
+
+      #u_body a {
+        color: #0000ee;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body
+    class="clean-body u_body"
+    style="
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      background-color: #ffffff;
+      color: #000000;
+    "
+  >
+    <!--[if IE]><div class="ie-container"><![endif]-->
+    <!--[if mso]><div class="mso-container"><![endif]-->
+    <table
+      id="u_body"
+      style="
+        border-collapse: collapse;
+        table-layout: fixed;
+        border-spacing: 0;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        vertical-align: top;
+        min-width: 320px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        width: 100%;
+      "
+      cellpadding="0"
+      cellspacing="0"
     >
-      <img
-        src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/SafeSpeak-LogoWord_lolmgp.png"
-        alt="SafeSpeak Logo"
-        style="width: 150px"
-        class="m-2"
-      />
-    </div>
-    <div class="card m-4 p-3">
-        <div class="card-body d-flex flex-column align-items-center">
-          <img
-            src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/Group_186_ncqktn.png"
-            alt="Thumbs Down Icon"
-            style="width: 100px"
-          />
-          <h1 class="m-3 text-danger">Ditolak</h1>
-          <p class="fs-5 text-center">
-            Laporan ditolak. Kamu bisa melihat alasan penolakan di halaman detail laporan pada pada situs <a href="https://safespeak.my.id" class="fw-bold text-primary">safespeak.my.id</a></br>
-            <strong>Jika anda merasa ini adalah kesalahan</strong>, silahkan email ke <a href="mailto:safespeak@gmail.com" class="fw-bold text-primary">safespeak@gmail.com</a>.
-          </p>
-          <img class="illustration" src="https://res.cloudinary.com/dcgp7jyh2/image/upload/v1717680602/Beranda-Dosen-1_wswaje.png" alt="Illustration of a teacher helping a student">
-        </div>
-      </div>
-    </div>
+      <tbody>
+        <tr style="vertical-align: top">
+          <td
+            style="
+              word-break: break-word;
+              border-collapse: collapse !important;
+              vertical-align: top;
+            "
+          >
+            <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #ffffff;"><![endif]-->
+
+            <div
+              class="u-row-container"
+              style="padding: 0px; background-color: transparent"
+            >
+              <div
+                class="u-row"
+                style="
+                  margin: 0 auto;
+                  min-width: 320px;
+                  max-width: 500px;
+                  overflow-wrap: break-word;
+                  word-wrap: break-word;
+                  word-break: break-word;
+                  background-color: transparent;
+                "
+              >
+                <div
+                  style="
+                    border-collapse: collapse;
+                    display: table;
+                    width: 100%;
+                    height: 100%;
+                    background-color: transparent;
+                  "
+                >
+                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:500px;"><tr style="background-color: transparent;"><![endif]-->
+
+                  <!--[if (mso)|(IE)]><td align="center" width="500" style="width: 500px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                  <div
+                    class="u-col u-col-100"
+                    style="
+                      max-width: 320px;
+                      min-width: 500px;
+                      display: table-cell;
+                      vertical-align: top;
+                    "
+                  >
+                    <div style="height: 100%; width: 100% !important">
+                      <!--[if (!mso)&(!IE)]><!-->
+                      <div
+                        style="
+                          box-sizing: border-box;
+                          height: 100%;
+                          padding: 0px;
+                          border-top: 0px solid transparent;
+                          border-left: 0px solid transparent;
+                          border-right: 0px solid transparent;
+                          border-bottom: 0px solid transparent;
+                        "
+                      >
+                        <!--<![endif]-->
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="left"
+                                    >
+                                      <img
+                                        align="left"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717727645054-SafeSpeak-LogoWord.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 29%;
+                                          max-width: 139.2px;
+                                        "
+                                        width="139.2"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  height="0px"
+                                  align="center"
+                                  border="0"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  width="100%"
+                                  style="
+                                    border-collapse: collapse;
+                                    table-layout: fixed;
+                                    border-spacing: 0;
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    vertical-align: top;
+                                    border-top: 1px solid #bbbbbb;
+                                    -ms-text-size-adjust: 100%;
+                                    -webkit-text-size-adjust: 100%;
+                                  "
+                                >
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td
+                                        style="
+                                          word-break: break-word;
+                                          border-collapse: collapse !important;
+                                          vertical-align: top;
+                                          font-size: 0px;
+                                          line-height: 0px;
+                                          mso-line-height-rule: exactly;
+                                          -ms-text-size-adjust: 100%;
+                                          -webkit-text-size-adjust: 100%;
+                                        "
+                                      >
+                                        <span>&#160;</span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="center"
+                                    >
+                                      <img
+                                        align="center"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717903496528-Group%20186.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 22%;
+                                          max-width: 105.6px;
+                                        "
+                                        width="105.6"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <div
+                                  style="
+                                    font-size: 25px;
+                                    color: #e81059;
+                                    line-height: 140%;
+                                    text-align: center;
+                                    word-wrap: break-word;
+                                  "
+                                >
+                                  <p style="line-height: 140%">
+                                    <strong>Ditolak</strong>
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <div
+                                  style="
+                                    font-size: 14px;
+                                    line-height: 140%;
+                                    text-align: center;
+                                    word-wrap: break-word;
+                                  "
+                                >
+                                  <p style="line-height: 140%">
+                                    <span
+                                      style="
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        float: none;
+                                        display: inline;
+                                        line-height: 19.6px;
+                                      "
+                                      >Laporan ditolak. Kamu bisa melihat alasan
+                                      penolakan di halaman detail laporan pada
+                                      pada situs
+                                    </span>
+                                    <a
+                                      style="
+                                        box-sizing: border-box;
+                                        text-decoration-line: underline;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        color: rgba(
+                                          var(--bs-primary-rgb),
+                                          var(--bs-text-opacity)
+                                        );
+                                      "
+                                      href="https://safespeak.my.id/"
+                                      class="fw-bold text-primary"
+                                      >safespeak.my.id</a
+                                    >
+                                  </p>
+                                  <p style="line-height: 140%">
+                                    <br
+                                      style="
+                                        box-sizing: border-box;
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                      "
+                                    /><strong
+                                      style="
+                                        box-sizing: border-box;
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                      "
+                                      >Jika anda merasa ini adalah
+                                      kesalahan</strong
+                                    >
+                                    <span
+                                      style="
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        float: none;
+                                        display: inline;
+                                        line-height: 19.6px;
+                                      "
+                                      >, silahkan email ke </span
+                                    ><span
+                                      style="
+                                        color: #000000;
+                                        line-height: 19.6px;
+                                      "
+                                      ><a
+                                        style="
+                                          box-sizing: border-box;
+                                          text-align: center;
+                                          white-space: normal;
+                                          background-color: #ffffff;
+                                          color: #000000;
+                                        "
+                                        href="mailto:safespeak@gmail.com"
+                                        class="fw-bold text-primary"
+                                        >safespeak@gmail.com</a
+                                      ></span
+                                    >
+                                    <span
+                                      style="
+                                        color: #212529;
+                                        text-align: center;
+                                        white-space: normal;
+                                        background-color: #ffffff;
+                                        float: none;
+                                        display: inline;
+                                        line-height: 19.6px;
+                                      "
+                                      >.</span
+                                    >
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  width="100%"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                >
+                                  <tr>
+                                    <td
+                                      style="
+                                        padding-right: 0px;
+                                        padding-left: 0px;
+                                      "
+                                      align="center"
+                                    >
+                                      <img
+                                        align="center"
+                                        border="0"
+                                        src="https://assets.unlayer.com/projects/236705/1717727825799-Beranda-Dosen-1.png"
+                                        alt=""
+                                        title=""
+                                        style="
+                                          outline: none;
+                                          text-decoration: none;
+                                          -ms-interpolation-mode: bicubic;
+                                          clear: both;
+                                          display: inline-block !important;
+                                          border: none;
+                                          height: auto;
+                                          float: none;
+                                          width: 71%;
+                                          max-width: 340.8px;
+                                        "
+                                        width="340.8"
+                                      />
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table
+                          style="font-family: arial, helvetica, sans-serif"
+                          role="presentation"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  overflow-wrap: break-word;
+                                  word-break: break-word;
+                                  padding: 10px;
+                                  font-family: arial, helvetica, sans-serif;
+                                "
+                                align="left"
+                              >
+                                <table
+                                  height="0px"
+                                  align="center"
+                                  border="0"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  width="100%"
+                                  style="
+                                    border-collapse: collapse;
+                                    table-layout: fixed;
+                                    border-spacing: 0;
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    vertical-align: top;
+                                    border-top: 1px solid #bbbbbb;
+                                    -ms-text-size-adjust: 100%;
+                                    -webkit-text-size-adjust: 100%;
+                                  "
+                                >
+                                  <tbody>
+                                    <tr style="vertical-align: top">
+                                      <td
+                                        style="
+                                          word-break: break-word;
+                                          border-collapse: collapse !important;
+                                          vertical-align: top;
+                                          font-size: 0px;
+                                          line-height: 0px;
+                                          mso-line-height-rule: exactly;
+                                          -ms-text-size-adjust: 100%;
+                                          -webkit-text-size-adjust: 100%;
+                                        "
+                                      >
+                                        <span>&#160;</span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <!--[if (!mso)&(!IE)]><!-->
+                      </div>
+                      <!--<![endif]-->
+                    </div>
+                  </div>
+                  <!--[if (mso)|(IE)]></td><![endif]-->
+                  <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                </div>
+              </div>
+            </div>
+
+            <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--[if mso]></div><![endif]-->
+    <!--[if IE]></div><![endif]-->
   </body>
 </html>
+
 `;
   }
 }
