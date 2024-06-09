@@ -306,21 +306,23 @@ export const countReports = async (req, res) => {
           status_0: [{ $match: { status: 0 } }, { $count: 'count' }],
           status_1: [{ $match: { status: 1 } }, { $count: 'count' }],
           status_2: [{ $match: { status: 2 } }, { $count: 'count' }],
+          status_3: [{ $match: { status: 3 } }, { $count: 'count' }],
         },
       },
     ]);
   } catch (error) {
     return res.status(500).json({ message: 'Could not count the reports!' });
   }
-  const { total, status_0, status_1, status_2 } = {
+  const { total, status_0, status_1, status_2, status_3 } = {
     total: reports[0].totalCount[0] ? reports[0].totalCount[0].count : 0,
     status_0: reports[0].status_0[0] ? reports[0].status_0[0].count : 0,
     status_1: reports[0].status_1[0] ? reports[0].status_1[0].count : 0,
     status_2: reports[0].status_2[0] ? reports[0].status_2[0].count : 0,
+    status_3: reports[0].status_3[0] ? reports[0].status_3[0].count : 0,
   };
 
   res.status(200).json({
     message: 'Success',
-    data: { total, status_0, status_1, status_2 },
+    data: { total, status_0, status_1, status_2: status_2 + status_3 },
   });
 };
