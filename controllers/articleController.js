@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 import Article from '../models/articleModel.js';
-import cloudinary from '../upload/cloudinary.js';
+import storage from '../upload/storage.js';
 
 export const getAllArticles = async (req, res) => {
   let articles;
@@ -40,21 +40,21 @@ export const insertArticle = async (req, res) => {
   const file = req.file;
   let imageUrl;
 
-  try {
-    imageUrl = await cloudinary('upload', req.file);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-
   const errors = validationResult(req);
   if (!errors.isEmpty) {
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
+  try {
+    imageUrl = await storage({ file });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+
   const newArticle = new Article({
     title,
     content,
-    image: imageUrl,
+    image: imageUrl.path,
     is_delete: false,
   });
 
@@ -94,10 +94,10 @@ export const updateArticle = async (req, res) => {
   }
 
   if (typeof image === 'object') {
-    const publicId = article.image.split('/').slice(-1)[0].split('.')[0];
+    const publicId = article.image.split('/').slice(-1)[0];
 
     try {
-      await cloudinary('replace', image, publicId);
+      await storage({ file: image, type: 1, old_name: publicId });
     } catch (error) {
       return res.status(400).json({ message: 'Could not upload your image!' });
     }
