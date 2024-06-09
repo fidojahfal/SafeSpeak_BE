@@ -4,6 +4,8 @@ import Report from '../models/reportModel.js';
 import User from '../models/userModel.js';
 import Mahasiswa from '../models/mahasiswaModel.js';
 import sendEmail from '../mails/sendEmail.js';
+import fs from 'fs';
+import storage from '../upload/storage.js';
 
 export const getAllReports = async (req, res) => {
   let reports;
@@ -26,9 +28,14 @@ export const insertReport = async (req, res) => {
     is_anonim,
   } = req.body;
   const { id } = req.userData;
+  const file = req.file;
+  let imageUrl;
+  console.log(req.body);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    fs.unlinkSync(file.path);
+    console.log(errors);
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
@@ -41,26 +48,34 @@ export const insertReport = async (req, res) => {
       $or: [{ status: 0 }, { status: 1 }],
     });
   } catch (error) {
+    fs.unlinkSync(file.path);
     return res
       .status(500)
       .json({ message: 'Could not find available report!' });
   }
 
   if (checkReport) {
+    fs.unlinkSync(file.path);
     return res.status(400).json({
       message:
         'There are still an active report, please edit that report or delete it!',
     });
   }
 
+  try {
+    imageUrl = await storage({ file });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+
   const newReport = new Report({
     title,
-    type,
+    type: parseInt(type),
     place_report,
     date_report,
     description,
-    evidence,
-    is_anonim,
+    evidence: imageUrl.path,
+    is_anonim: is_anonim === 'true',
     user_id: id,
     status: 0,
     is_delete: false,
@@ -204,9 +219,11 @@ export const updateReport = async (req, res) => {
     is_anonim,
   } = req.body;
   const { report_id } = req.params;
+  const file = req.file;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    if (typeof file === 'object') fs.unlinkSync(file.path);
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
@@ -214,17 +231,30 @@ export const updateReport = async (req, res) => {
   try {
     report = await Report.findById(report_id);
   } catch (error) {
+    if (typeof file === 'object') fs.unlinkSync(file.path);
     return res.status(422).json({ message: 'Could not find report!' });
   }
 
   if (report.is_delete) {
+    if (typeof file === 'object') fs.unlinkSync(file.path);
     return res
       .status(404)
       .json({ message: 'Could not find report specified by id!' });
   }
 
   if (report.status !== 0) {
+    if (typeof file === 'object') fs.unlinkSync(file.path);
     return res.status(400).json({ message: 'Your report already processed!' });
+  }
+
+  if (typeof file === 'object') {
+    const publicId = report.evidence.split('/').slice(-1)[0];
+
+    try {
+      await storage({ file, type: 1, old_name: publicId });
+    } catch (error) {
+      return res.status(400).json({ message: 'Could not upload your image!' });
+    }
   }
 
   try {
