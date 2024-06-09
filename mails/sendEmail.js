@@ -1,20 +1,21 @@
 import transporter from '../mails/config.js';
-import templateMail from '../mails/template.js';
+import templateMailSiswa from '../mails/templateSiswa.js';
+import templateMailDosen from './templateDosen.js';
 
-async function sendEmail(role, email) {
+async function sendEmail({ role, email, status = 0, name = '' }) {
   let message;
   role
     ? (message = {
-        from: '<safespeakteams>@gmail.com',
+        from: '"SafeSpeak" <noreply@safespeak.my.id>',
         to: email,
         subject: 'Your reports',
-        html: templateMail,
+        html: name ? templateMailDosen(name) : templateMailDosen(),
       })
     : (message = {
-        from: '<safespeakteams>@gmail.com',
+        from: '"SafeSpeak" <noreply@safespeak.my.id>',
         to: email,
         subject: 'Your reports',
-        html: templateMail,
+        html: templateMailSiswa(status),
       });
   try {
     await transporter.sendMail(message);

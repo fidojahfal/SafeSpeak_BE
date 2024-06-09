@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator';
 import Article from '../models/articleModel.js';
+import storage from '../upload/storage.js';
 
 export const getAllArticles = async (req, res) => {
   let articles;
@@ -37,37 +38,23 @@ export const getArticleById = async (req, res) => {
 export const insertArticle = async (req, res) => {
   const { title, content } = req.body;
   const file = req.file;
-
-  const formData = new FormData();
-  const blob = new Blob([file.buffer]);
-  formData.append('file', blob);
-  formData.append('upload_preset', `${process.env.CLOUD_TOKEN}`);
-
-  let uploadImage;
-  try {
-    uploadImage = await fetch(process.env.CLOUD_LINK, {
-      method: 'POST',
-      body: formData,
-    });
-  } catch (error) {
-    return res.status(500).json({ message: 'Failed to upload image!' });
-  }
-
-  if (!uploadImage.ok) {
-    return res.status(400).json({ message: 'Failed to save your image!' });
-  }
-  const responseJson = await uploadImage.json();
-  const imageUrl = responseJson.secure_url;
+  let imageUrl;
 
   const errors = validationResult(req);
   if (!errors.isEmpty) {
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
+  try {
+    imageUrl = await storage({ file });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+
   const newArticle = new Article({
     title,
     content,
-    image: imageUrl,
+    image: imageUrl.path,
     is_delete: false,
   });
 
@@ -82,6 +69,7 @@ export const insertArticle = async (req, res) => {
 export const updateArticle = async (req, res) => {
   const { title, content } = req.body;
   const { article_id } = req.params;
+  const image = req.file;
 
   const errors = validationResult(req);
   if (!errors.isEmpty) {
@@ -103,6 +91,16 @@ export const updateArticle = async (req, res) => {
       message:
         "Can't edit your article, please make sure you still have article specified by id!",
     });
+  }
+
+  if (typeof image === 'object') {
+    const publicId = article.image.split('/').slice(-1)[0];
+
+    try {
+      await storage({ file: image, type: 1, old_name: publicId });
+    } catch (error) {
+      return res.status(400).json({ message: 'Could not upload your image!' });
+    }
   }
 
   try {

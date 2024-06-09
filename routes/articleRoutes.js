@@ -9,12 +9,22 @@ import {
 } from '../controllers/articleController.js';
 import { body } from 'express-validator';
 import multer from 'multer';
+import path from 'path';
 
 const router = Router();
-const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: 5000000 },
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    const dir = 'public/temp/';
+    callback(null, dir);
+  },
+  filename: function (req, file, callback) {
+    // Buat nama file yang unik
+    const filename = `file_${Date.now()}${path.extname(file.originalname)}`;
+    callback(null, filename);
+  },
 });
+
+const upload = multer({ storage, limits: { fileSize: 5000000 } });
 
 router.get('/', getAllArticles);
 
@@ -37,6 +47,7 @@ router.put(
     body('title').isLength({ min: 1, max: 255 }),
     body('content').isLength({ min: 1, max: 255 }),
   ],
+  upload.single('image'),
   updateArticle
 );
 
