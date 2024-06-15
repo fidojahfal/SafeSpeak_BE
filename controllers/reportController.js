@@ -7,6 +7,7 @@ import sendEmail from '../mails/sendEmail.js';
 import fs from 'fs';
 import storage from '../upload/storage.js';
 import mongoose from 'mongoose';
+import axios from 'axios';
 
 export const getAllReports = async (req, res) => {
   let reports;
@@ -31,11 +32,11 @@ export const insertReport = async (req, res) => {
   const { id } = req.userData;
   const file = req.file;
   const session = await mongoose.startSession();
+  let imageUrl;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     fs.unlinkSync(file.path);
-    console.log(errors);
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
@@ -48,7 +49,6 @@ export const insertReport = async (req, res) => {
     }).session(session);
 
     if (checkReport) {
-      console.log(checkReport);
       if (file) fs.unlinkSync(file.path);
       await session.abortTransaction();
       session.endSession();
@@ -58,7 +58,7 @@ export const insertReport = async (req, res) => {
       });
     }
 
-    const imageUrl = await storage({ file });
+    imageUrl = await storage({ file });
 
     const newReport = new Report({
       title,
@@ -79,6 +79,9 @@ export const insertReport = async (req, res) => {
     if (!user) {
       await session.abortTransaction();
       session.endSession();
+      await axios.delete(`${STORAGE_URI}/storages/file`, {
+        data: { name: imageUrl.filename },
+      });
       return res.status(422).json({ message: 'Could not find user!' });
     }
 
@@ -101,6 +104,10 @@ export const insertReport = async (req, res) => {
     await session.abortTransaction();
     session.endSession();
     if (file) fs.unlinkSync(file.path);
+    if (imageUrl)
+      await axios.delete(`${STORAGE_URI}/storages/file`, {
+        data: { name: imageUrl.filename },
+      });
     return res.status(500).json({
       message: 'An error occurred while processing your request.',
       error: error.message,
@@ -169,7 +176,6 @@ export const updateStatus = async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 

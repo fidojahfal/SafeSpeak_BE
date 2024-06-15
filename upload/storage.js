@@ -23,7 +23,6 @@ async function storage({ file, type, old_name }) {
     throw new Error('Failed to save an image!');
   }
   if (response.status !== 201) {
-    console.log(response);
     fs.unlinkSync(file.path);
     throw new Error("Can't save your image");
   }
