@@ -6,6 +6,7 @@ import Mahasiswa from '../models/mahasiswaModel.js';
 import sendEmail from '../mails/sendEmail.js';
 import fs from 'fs';
 import storage from '../upload/storage.js';
+import mongoose from 'mongoose';
 
 export const getAllReports = async (req, res) => {
   let reports;
@@ -29,8 +30,7 @@ export const insertReport = async (req, res) => {
   } = req.body;
   const { id } = req.userData;
   const file = req.file;
-  let imageUrl;
-  console.log(req.body);
+  const session = await mongoose.startSession();
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -39,64 +39,53 @@ export const insertReport = async (req, res) => {
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
-  let checkReport;
-
+  session.startTransaction();
   try {
-    checkReport = await Report.findOne({
+    const checkReport = await Report.findOne({
       user_id: id,
       is_delete: false,
       $or: [{ status: 0 }, { status: 1 }],
+    }).session(session);
+
+    if (checkReport) {
+      console.log(checkReport);
+      if (file) fs.unlinkSync(file.path);
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(400).json({
+        message:
+          'There are still an active report, please edit that report or delete it!',
+      });
+    }
+
+    const imageUrl = await storage({ file });
+
+    const newReport = new Report({
+      title,
+      type: parseInt(type),
+      place_report,
+      date_report,
+      description,
+      evidence: imageUrl.path,
+      is_anonim: is_anonim === 'true',
+      user_id: id,
+      status: 0,
+      is_delete: false,
     });
-  } catch (error) {
-    fs.unlinkSync(file.path);
-    return res
-      .status(500)
-      .json({ message: 'Could not find available report!' });
-  }
 
-  if (checkReport) {
-    fs.unlinkSync(file.path);
-    return res.status(400).json({
-      message:
-        'There are still an active report, please edit that report or delete it!',
-    });
-  }
+    await newReport.save({ session });
 
-  try {
-    imageUrl = await storage({ file });
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
+    const user = await User.findById(id).session(session);
+    if (!user) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(422).json({ message: 'Could not find user!' });
+    }
 
-  const newReport = new Report({
-    title,
-    type: parseInt(type),
-    place_report,
-    date_report,
-    description,
-    evidence: imageUrl.path,
-    is_anonim: is_anonim === 'true',
-    user_id: id,
-    status: 0,
-    is_delete: false,
-  });
-
-  try {
-    await newReport.save();
-  } catch (error) {
-    return res.status(500).json({ message: 'Could not save report!' });
-  }
-
-  let user;
-  try {
-    user = await User.findById(id);
-  } catch (error) {
-    return res.status(422).json({ message: 'Could not find user!' });
-  }
-
-  try {
     const mahasiswa =
-      !is_anonim && (await Mahasiswa.findOne({ user_id: id }, ['name']));
+      !is_anonim &&
+      (await Mahasiswa.findOne({ user_id: id }, ['name']).session(session));
+
     await sendEmail({ role: 0, email: user.email });
     is_anonim
       ? await sendEmail({ role: 1, email: 'udonotmatter@gmail.com' })
@@ -105,10 +94,18 @@ export const insertReport = async (req, res) => {
           email: 'udonotmatter@gmail.com',
           name: mahasiswa.name,
         });
+    await session.commitTransaction();
+    session.endSession();
+    res.status(201).json({ message: 'Success', data: { report: newReport } });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to send email.' });
+    await session.abortTransaction();
+    session.endSession();
+    if (file) fs.unlinkSync(file.path);
+    return res.status(500).json({
+      message: 'An error occurred while processing your request.',
+      error: error.message,
+    });
   }
-  res.status(201).json({ message: 'Success', data: { report: newReport } });
 };
 
 export const getReportById = async (req, res) => {
@@ -172,6 +169,7 @@ export const updateStatus = async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log(errors);
     return res.status(401).json({ message: 'Invalid input from user!' });
   }
 
