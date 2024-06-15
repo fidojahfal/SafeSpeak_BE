@@ -27,10 +27,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage, limits: { fileSize: 5000000 } });
 
 router.get('/', getAllArticles);
+router.get('/:article_id', getArticleById);
 
 router.use(authToken);
-
-router.get('/:article_id', getArticleById);
 
 router.post(
   '/',
