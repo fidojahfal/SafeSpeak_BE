@@ -204,7 +204,7 @@ function templateMailDosen(name = `Anonymous`) {
                             <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
                               <div style="font-size: 14px; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                <p style="line-height: 140%;"><span data-metadata="<!--(figmeta)eyJmaWxlS2V5IjoibU5BRm1WZDdWUEY1anJkVHl4ZG1WdSIsInBhc3RlSUQiOjI1MzE2NTQ4LCJkYXRhVHlwZSI6InNjZW5lIn0K(/figmeta)-->" style="line-height: 19.6px;"></span><span style="color: #212529; text-align: center; white-space: normal; background-color: #ffffff; float: none; display: inline; line-height: 19.6px;">Laporan ini dibuat oleh {{NAME}}</span>
+                                <p style="line-height: 140%;"><span data-metadata="<!--(figmeta)eyJmaWxlS2V5IjoibU5BRm1WZDdWUEY1anJkVHl4ZG1WdSIsInBhc3RlSUQiOjI1MzE2NTQ4LCJkYXRhVHlwZSI6InNjZW5lIn0K(/figmeta)-->" style="line-height: 19.6px;"></span><span style="color: #212529; text-align: center; white-space: normal; background-color: #ffffff; float: none; display: inline; line-height: 19.6px;">Laporan ini dibuat oleh ${name}</span>
                                   <br
                                     style="box-sizing: border-box; color: #212529; text-align: center; white-space: normal; background-color: #ffffff;"><span style="color: #212529; text-align: center; white-space: normal; background-color: #ffffff; float: none; display: inline; line-height: 19.6px;">Laporan bisa dicek di halaman </span><strong style="box-sizing: border-box; color: #212529; text-align: center; white-space: normal; background-color: #ffffff;">Daftar Laporan</strong>
                                     <span
