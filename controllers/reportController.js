@@ -14,7 +14,7 @@ export const getAllReports = async (req, res) => {
   try {
     reports = await Report.find({ is_delete: false });
   } catch (error) {
-    return res.status(500).json({ message: 'Could not find user!' });
+    return res.status(502).json({ message: 'Could not find user!' });
   }
   res.status(200).json({ message: 'Success', data: { reports } });
 };
@@ -37,7 +37,7 @@ export const insertReport = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     fs.unlinkSync(file.path);
-    return res.status(401).json({ message: 'Invalid input from user!' });
+    return res.status(400).json({ message: 'Invalid input from user!' });
   }
 
   session.startTransaction();
@@ -52,7 +52,7 @@ export const insertReport = async (req, res) => {
       if (file) fs.unlinkSync(file.path);
       await session.abortTransaction();
       session.endSession();
-      return res.status(400).json({
+      return res.status(403).json({
         message:
           'There are still an active report, please edit that report or delete it!',
       });
@@ -82,7 +82,7 @@ export const insertReport = async (req, res) => {
       await axios.delete(`${STORAGE_URI}/storages/file`, {
         data: { name: imageUrl.filename },
       });
-      return res.status(422).json({ message: 'Could not find user!' });
+      return res.status(404).json({ message: 'Could not find user!' });
     }
 
     const mahasiswa =
@@ -141,14 +141,15 @@ export const getReportById = async (req, res) => {
     };
   } catch (error) {
     return res
-      .status(422)
+      .status(502)
       .json({ message: 'Could not find specified report by id!' });
   }
 
   if (report.is_delete) {
-    return res
-      .status(404)
-      .json({ message: 'Could not find report specified by id!' });
+    return res.status(404).json({
+      message:
+        "Can't find your report, please make sure your report is not deleted!",
+    });
   }
 
   if (report.is_anonim) {
@@ -164,7 +165,7 @@ export const getReportsByUserId = async (req, res) => {
   try {
     reports = await Report.find({ user_id, is_delete: false });
   } catch (error) {
-    return res.status(422).json({ message: 'Could not find user reports!' });
+    return res.status(502).json({ message: 'Could not find user reports!' });
   }
 
   res.status(200).json({ message: 'Success', data: { reports } });
@@ -176,30 +177,31 @@ export const updateStatus = async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(401).json({ message: 'Invalid input from user!' });
+    return res.status(400).json({ message: 'Invalid input from user!' });
   }
 
   let report;
   try {
     report = await Report.findById(report_id);
   } catch (error) {
-    return res.status(422).json({ message: 'Could not find report!' });
+    return res.status(502).json({ message: 'Could not find report!' });
   }
 
   if (report.is_delete) {
-    return res
-      .status(404)
-      .json({ message: 'Could not find report specified by id!' });
+    return res.status(404).json({
+      message:
+        "Can't find your report, please make sure your report is not deleted!",
+    });
   }
 
   if (status === 3 && !reason) {
-    return res.status(404).json({ message: 'Please add your reject reason!' });
+    return res.status(400).json({ message: 'Please add your reject reason!' });
   }
 
   try {
     await Report.findByIdAndUpdate(report_id, { status, reason });
   } catch (error) {
-    return res.status(500).json({ message: 'Could not update report!' });
+    return res.status(502).json({ message: 'Could not update report!' });
   }
 
   try {
@@ -209,7 +211,7 @@ export const updateStatus = async (req, res) => {
     return res.status(500).json({ message: 'Failed to send email.' });
   }
 
-  res.status(200).json({ message: 'Success', data: null });
+  res.status(201).json({ message: 'Success', data: null });
 };
 
 export const updateReport = async (req, res) => {
@@ -228,7 +230,7 @@ export const updateReport = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     if (typeof file === 'object') fs.unlinkSync(file.path);
-    return res.status(401).json({ message: 'Invalid input from user!' });
+    return res.status(400).json({ message: 'Invalid input from user!' });
   }
 
   let report;
@@ -236,19 +238,20 @@ export const updateReport = async (req, res) => {
     report = await Report.findById(report_id);
   } catch (error) {
     if (typeof file === 'object') fs.unlinkSync(file.path);
-    return res.status(422).json({ message: 'Could not find report!' });
+    return res.status(502).json({ message: 'Could not find report!' });
   }
 
   if (report.is_delete) {
     if (typeof file === 'object') fs.unlinkSync(file.path);
-    return res
-      .status(404)
-      .json({ message: 'Could not find report specified by id!' });
+    return res.status(404).json({
+      message:
+        "Can't find your report, please make sure your report is not deleted!",
+    });
   }
 
   if (report.status !== 0) {
     if (typeof file === 'object') fs.unlinkSync(file.path);
-    return res.status(400).json({ message: 'Your report already processed!' });
+    return res.status(403).json({ message: 'Your report already processed!' });
   }
 
   if (typeof file === 'object') {
@@ -257,7 +260,7 @@ export const updateReport = async (req, res) => {
     try {
       await storage({ file, type: 1, old_name: publicId });
     } catch (error) {
-      return res.status(400).json({ message: 'Could not upload your image!' });
+      return res.status(500).json({ message: 'Could not upload your image!' });
     }
   }
 
@@ -284,11 +287,11 @@ export const deleteReport = async (req, res) => {
   try {
     report = await Report.findById(report_id);
   } catch (error) {
-    return res.status(422).json({ message: 'Could not find report!' });
+    return res.status(502).json({ message: 'Could not find report!' });
   }
 
   if (report.status !== 0) {
-    return res.status(400).json({ message: 'Your report already processed!' });
+    return res.status(403).json({ message: 'Your report already processed!' });
   }
 
   try {

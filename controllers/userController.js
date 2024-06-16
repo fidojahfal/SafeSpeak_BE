@@ -9,7 +9,7 @@ export const getAllUsers = async (req, res) => {
   try {
     users = await User.find({}, '-password');
   } catch (error) {
-    return res.status(500).json({ message: 'Could not find user' });
+    return res.status(502).json({ message: 'Could not find user' });
   }
   res.status(200).json({ message: 'Success', data: { users } });
 };
@@ -23,7 +23,7 @@ export const getUserById = async (req, res) => {
       .exec();
   } catch (error) {
     return res
-      .status(422)
+      .status(502)
       .json({ message: 'Could not find specified user by id' });
   }
   res.status(200).json({ message: 'Success', data: { user: users } });
@@ -53,7 +53,7 @@ export const login = async (req, res) => {
 
   if (!user || !isPasswordValid) {
     return res
-      .status(402)
+      .status(400)
       .json({ message: 'Your username or password is wrong.' });
   }
 
@@ -81,7 +81,7 @@ export const getOwnProfile = async (req, res) => {
     user = await User.findById(id, '-password');
   } catch (error) {
     return res
-      .status(500)
+      .status(502)
       .json({ message: 'Could not find specified user by id' });
   }
 
@@ -97,18 +97,18 @@ export const register = async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ message: 'Invalid input from user!' });
+    return res.status(400).json({ message: 'Invalid input from user!' });
   }
 
   let user;
   try {
     user = await User.findOne({ username });
   } catch (error) {
-    return res.status(500).json({ message: 'Could not find user!' });
+    return res.status(502).json({ message: 'Could not find user!' });
   }
 
   if (user) {
-    return res.status(402).json({ message: 'Username already registered' });
+    return res.status(403).json({ message: 'Username already registered' });
   }
 
   let hashedPassword;
@@ -144,7 +144,7 @@ export const register = async (req, res) => {
     return res.status(500).json({ message: 'Could not save user!' });
   }
 
-  res.status(200).json({ message: 'Success' });
+  res.status(201).json({ message: 'Success' });
 };
 
 export const updateUser = async (req, res) => {
@@ -153,7 +153,7 @@ export const updateUser = async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ message: 'Invalid input from user!' });
+    return res.status(400).json({ message: 'Invalid input from user!' });
   }
 
   try {
@@ -162,5 +162,5 @@ export const updateUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: 'Could not update user!' });
   }
-  res.status(200).json({ message: 'Success' });
+  res.status(201).json({ message: 'Success' });
 };
