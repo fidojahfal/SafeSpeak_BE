@@ -67,7 +67,7 @@ export const insertReport = async (req, res) => {
       date_report,
       description,
       evidence: imageUrl.path,
-      is_anonim: is_anonim === '1',
+      is_anonim,
       user_id: id,
       status: 0,
       is_delete: false,
@@ -272,7 +272,7 @@ export const updateReport = async (req, res) => {
       date_report,
       description,
       evidence,
-      is_anonim: is_anonim === '1',
+      is_anonim,
     });
   } catch (error) {
     return res.status(500).json({ message: 'Could not update report!' });
