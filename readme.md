@@ -1,7 +1,7 @@
 
 # SafeSpeak
 
-Website Portal Laporan & Informasi Mahasiswa seputar Kekerasan Seksual dan Bullying bagian Back End.
+Website Portal Laporan & Informasi Mahasiswa seputar Kekerasan Seksual dan Bullying bagian Front End.
 
 
 ## Installation
@@ -17,6 +17,21 @@ Install SafeSpeak_BE with npm
 ```bash
   npm install
 ```    
+Make new environment file from .env.example
+
+```bash
+  cp .env.example .env
+```
+Fill the new environment copied from example
+
+```bash
+  MONGO_URI= //Use your own link to mongodb database
+  SECRET_JWT= //Fill with your own secret
+  BCRYPT_SALT= //Use number to fill this salt
+  GMAIL_USER= //Fill with your own gmail_user
+  GMAIL_PASS= //Fill with your own gmail_pass
+  STORAGE_URI= //Use your storage service you trust
+```
 Run project SafeSpeak_BE with npm run
 
 ```bash
